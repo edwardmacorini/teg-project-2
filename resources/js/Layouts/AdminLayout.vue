@@ -1,32 +1,45 @@
 <template>
     <v-app id="inspire">
-        <v-navigation-drawer 
-          app 
-          dark 
-          permanent 
-          color="#0E0742">
+        <v-navigation-drawer app dark permanent color="#0E0742">
             <v-row justify="center" class="mt-10">
-              <v-avatar color="indigo" size="98">
-                  <span class="white--text headline">EM</span>
-              </v-avatar>
+                <v-avatar color="indigo" size="98">
+                    <span class="white--text headline">EM</span>
+                </v-avatar>
             </v-row>
             <v-row justify="center" class="mt-5">
-              <span class="white--text headline text-capitalize">{{userData.name}}</span>
+                <span class="white--text headline text-capitalize">{{
+                    userData.name
+                }}</span>
             </v-row>
             <v-row justify="center">
-              <span class="blue--text headline subtitle-2 text-capitalize">{{rolName}}</span>
+                <span class="blue--text headline subtitle-2 text-capitalize">{{
+                    rolName
+                }}</span>
             </v-row>
             <v-row class="mt-5">
-              <v-divider></v-divider>
+                <v-divider></v-divider>
             </v-row>
-            <v-row>
-              <p class="text-center">
-                <v-icon>
-                  mdi-earth
-                </v-icon>
-              </p>
-              <p></p>
-            </v-row>
+            <inertia-link
+                :href="route('sadmin-index')"
+                style="text-decoration: none;"
+                v-if="userData.privileges == 'sadmin'"
+            >
+                <v-row class="mt-5">
+                    <v-col cols="12" class="text-center">
+                        <v-icon
+                            style="font-size: 4em; border: none; text-decoration: none;"
+                        >
+                            mdi-earth
+                        </v-icon>
+                    </v-col>
+                    <v-col
+                        cols="12"
+                        class="text-center subtitle-1 mt-n5 white--text"
+                    >
+                        Organizaciones
+                    </v-col>
+                </v-row>
+            </inertia-link>
 
             <!--  -->
         </v-navigation-drawer>
@@ -36,6 +49,12 @@
             @click="drawer = !drawer"></v-app-bar-nav-icon> -->
 
             <v-toolbar-title>Application</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <form method="POST" @submit.prevent="logout">
+                <v-btn outlined color="primary" type="submit">
+                    Cerrar Sesión
+                </v-btn>
+            </form>
         </v-app-bar>
 
         <v-main>
@@ -46,10 +65,14 @@
 
 <script>
 export default {
-  props: {
-    userData: Object,
-    rolName: String
-  }
-
+    props: {
+        userData: Object,
+        rolName: String
+    },
+    methods: {
+        logout() {
+            this.$inertia.post(route("logout"));
+        }
+    }
 };
 </script>

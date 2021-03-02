@@ -5,7 +5,7 @@
             <default-layout>
                 <v-container>
                     <v-row justify="center" align="center" class="wh-100">
-                        <v-col cols="12" sm="9" md="6">
+                        <v-col cols="11" sm="8" md="5">
                             <v-card elevation="2" class="px-5 py-10">
                                 <v-card-title>
                                     <h5 class="headline text--secondary">
@@ -15,7 +15,7 @@
                                         Iniciar Sesión
                                     </h5>
                                 </v-card-title>
-                                <v-card-text>
+                                <v-card-text class="pt-5 px-10">
                                   <v-row>
                                     <v-text-field
                                       v-model="form.username"
@@ -30,7 +30,7 @@
                                       label="Contraseña"
                                     ></v-text-field>
                                   </v-row>
-                                  <v-row justify="center" class="mt-10">
+                                  <v-row justify="center" class="mt-10 px-10">
                                     <v-btn 
                                       type="submit"
                                       block

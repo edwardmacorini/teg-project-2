@@ -8,25 +8,21 @@ use Inertia\Inertia;
 
 class HomeController extends Controller
 {
+    private $privileges = array(
+        'sadmin' => 'sadmin',
+        'oadmin' => 'oadmin',
+        'admin' => 'admin',
+        'user' => 'user',
+    );
+
     public function index() {
-        return Auth::user();
-        // if(Auth::check()) {
-        //     switch (Auth::user()->privileges) {
-        //         case 'sadmin':
-        //             return Inertia::render('SAdmin/UsersAdmin/Index', [
-        //                 'userData' => Auth::user(),
-        //                 'rolName' => 'Super Administrador'
-        //             ]);
-        //             break;
-        //         
-        //         default:
-        //             echo "Fails";
-        //             break;
-        //     }
-        // }
-        // else 
-        // {
-        //     return Inertia::render('Forbiden');
-        // }
+        if(Auth::check()) {
+            if(Auth::user()->privileges == $this->privileges['sadmin'])
+            return Inertia::render('Dashboard/SAdmin/TeamsManager/Index', [
+                'userData' => Auth::user()
+            ]);
+
+            else return Inertia::render('Forbiden');
+        }
     }
 }

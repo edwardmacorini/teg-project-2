@@ -19,10 +19,10 @@ class CreateTeamsTable extends Migration
             $table->string('rif');
             $table->text('address');
             $table->string('number1');
-            $table->string('number2');
+            $table->string('number2')->nullable();
             $table->string('mail1');
-            $table->string('mail2');
-            $table->string('license');
+            $table->string('mail2')->nullable();
+            $table->string('license')->nullable();
             $table->integer('type');
             $table->timestamps();
 
