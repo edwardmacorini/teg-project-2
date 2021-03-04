@@ -31,7 +31,7 @@
                         <v-col>
                             <v-text-field
                                 label="Licencia"
-                                v-model="form.lincese"
+                                v-model="form.licence"
                             ></v-text-field>
                         </v-col>
                     </v-row>
@@ -73,11 +73,13 @@
                                             </v-btn>
                                         </template>
 
-                                        <v-card elevation="8" class="px-15 py-10 radio">
-                                            <v-card-title
-                                                class="headline"
-                                            >
-                                                Crear un usuario para completar el registro
+                                        <v-card
+                                            elevation="8"
+                                            class="px-15 py-10 radio"
+                                        >
+                                            <v-card-title class="headline">
+                                                Crear un usuario para completar
+                                                el registro
                                             </v-card-title>
 
                                             <v-card-text>
@@ -108,6 +110,15 @@
                                                 ></v-text-field>
                                             </v-card-text>
 
+                                            <v-card-text>
+                                                <v-text-field
+                                                    label="Confirmar Contraseña"
+                                                    v-model="
+                                                        form.password_confirmation
+                                                    "
+                                                ></v-text-field>
+                                            </v-card-text>
+
                                             <v-card-actions>
                                                 <v-spacer></v-spacer>
                                                 <v-btn
@@ -135,6 +146,7 @@
                 </form>
             </v-card-text>
         </v-card>
+        {{errors}}
     </admin-layout>
 </template>
 <script>
@@ -143,7 +155,8 @@ import AdminLayout from "../../../../Layouts/AdminLayout";
 export default {
     props: {
         userData: Object,
-        teams: Array
+        teams: Array,
+        errors: Object
     },
     components: {
         AdminLayout
@@ -157,15 +170,16 @@ export default {
                 address: null,
                 number1: null,
                 mail1: null,
-                license: null,
+                licence: null,
                 type: 0,
                 userFullName: null,
                 username: null,
                 email: null,
                 password: null,
                 password_confirmation: "",
-                privileges: 'oadmin',
-            })
+                privileges: "oadmin"
+            }),
+            dialog2: false
         };
     },
     methods: {
@@ -174,7 +188,7 @@ export default {
                 onFinish: () =>
                     this.form.reset("password", "password_confirmation")
             });
-        }
-    }
+        },
+    },
 };
 </script>

@@ -72,9 +72,3 @@ export default {
     }
 };
 </script>
-
-<style scoped>
-.radio {
-    border-radius: 20px;
-}
-</style>

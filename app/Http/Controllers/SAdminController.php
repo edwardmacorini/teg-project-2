@@ -40,27 +40,29 @@ class SAdminController extends Controller
     ]);
   }
 
-  public function storeOrg(Array $input)
+  public function storeOrg(Request $request)
   {
-    Validator::make($input, [
-      'name' => ['required', 'max:255'],
-      'userFulName' => ['required', 'string', 'max:255'],
-      'username' => ['required', 'string', 'max:255', 'unique:users'],
-      'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-      'password' => $this->passwordRules(),
-      'team_id' => ['nullable', 'numeric'],
-      'privileges' => ['required'],
-      'type' => ['boolean', 'required'],
-      'rif' => ['required', 'max:20'],
-      'address' => ['required', 'min:10'],
-      'number1' => ['required', 'numeric', 'max:20'],
-      'mail1' => ['required', 'string', 'max:255', 'unique:teams'],
-      'license' => ['required'],
+    
+    Validator::make($request->all(), [
+      'name' => 'required|string|max:255',
+      'rif' => 'required|numeric|max:9|min:9|unique:teams',
+      'address' => 'required',
+      'number1' => 'required|max:16|min:11',
+      'mail1' => 'required|email|unique:teams',
+      'licence' => 'required|max:255',
+      'type' => 'required',
+      'userFullName' => 'required|string|max:255',
+      'username' => 'required|max:16|min:6',
+      'email' => 'required|email|unique:users',
+      'password' => 'required|min:6|confirmed',
+      ])->validate();
 
+      $team = Team::create([
+        'name' => strtolower($request->input('name')),
+      ]);
 
-    ])->validate();
+      dd($request);
 
-    $org = new Team();
   }
 
   public function updateOrg(Request $request, $id)
