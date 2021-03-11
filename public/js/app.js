@@ -3015,6 +3015,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     userData: Object,
@@ -4512,6 +4515,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      show1: false,
       form: this.$inertia.form({
         username: '',
         password: ''
@@ -4626,6 +4630,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4635,6 +4640,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      show1: false,
+      show2: false,
       form: this.$inertia.form({
         name: "",
         last_name: "",
@@ -4825,6 +4832,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -4837,15 +4851,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      show1: false,
+      show2: false,
       dialog: false,
       form: this.$inertia.form({
         name: null,
         rif: null,
         address: null,
-        number1: null,
-        mail1: null,
+        number: null,
+        mail: null,
         licence: null,
-        type: 0,
+        type: null,
         userFullName: null,
         username: null,
         email: null,
@@ -4862,7 +4878,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.form.post(this.route("sadmin.orgs.store"), {
         onFinish: function onFinish() {
-          return _this.form.reset("password", "password_confirmation");
+          _this.form.reset("password", "password_confirmation");
         }
       });
     }
@@ -4915,11 +4931,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     userData: Object,
-    teams: Array
+    teams: Array,
+    userList: Array
   },
   components: {
     AdminLayout: _Layouts_AdminLayout__WEBPACK_IMPORTED_MODULE_0__.default
@@ -4938,16 +4963,54 @@ __webpack_require__.r(__webpack_exports__);
         sortable: true,
         value: "rif"
       }, {
+        text: "Tipo",
+        align: "center",
+        sortable: true,
+        value: "type"
+      }, {
         text: "Usuario",
         align: "center",
         sortable: true,
-        value: "user"
+        value: "username"
       }],
       items: []
     };
   },
+  // created: function() {
+  //     this.getUsers();
+  // },
   mounted: function mounted() {
-    this.items = this.teams;
+    var _this = this;
+
+    this.teams.forEach(function (element) {
+      _this.items.push({
+        name: element.name,
+        rif: element.rif,
+        type: element.type,
+        username: _this.conUser(element.id)
+      });
+    });
+  },
+  methods: {
+    // getUsers() {
+    //     var self = this;
+    //     axios.get('/api/users/all/oadmin')
+    //         .then(function(response) {
+    //             console.log(response.data);
+    //             self.usersList = response.data
+    //         })
+    // },
+    conUser: function conUser(id) {
+      var value;
+      this.userList.forEach(function (element) {
+        if (element.privileges == 'oadmin') {
+          if (element.team_id == id) {
+            value = element.username;
+          }
+        }
+      });
+      return value;
+    }
   }
 });
 
@@ -31555,25 +31618,18 @@ var render = function() {
           _c("v-spacer"),
           _vm._v(" "),
           _c(
-            "form",
+            "v-btn",
             {
-              attrs: { method: "POST" },
+              attrs: { type: "button", outlined: "", color: "blue darken-3" },
               on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.logout($event)
+                click: function($event) {
+                  return _vm.logout()
                 }
               }
             },
-            [
-              _c(
-                "v-btn",
-                { attrs: { outlined: "", color: "primary", type: "submit" } },
-                [_vm._v("\n                Cerrar Sesión\n            ")]
-              )
-            ],
-            1
-          )
+            [_vm._v("Cerrar Sesión")]
+          ),
+          _vm._v("\n        >\n    ")
         ],
         1
       ),
@@ -34313,21 +34369,10 @@ var render = function() {
                                 "h5",
                                 { staticClass: "headline text--secondary" },
                                 [
-                                  _c(
-                                    "v-btn",
-                                    { attrs: { icon: "", color: "primary" } },
-                                    [
-                                      _c("v-icon", [
-                                        _vm._v("mdi-arrow-left-circle")
-                                      ])
-                                    ],
-                                    1
-                                  ),
                                   _vm._v(
                                     "\n                                    Iniciar Sesión\n                                "
                                   )
-                                ],
-                                1
+                                ]
                               )
                             ]),
                             _vm._v(" "),
@@ -34361,7 +34406,16 @@ var render = function() {
                                     _c("v-text-field", {
                                       attrs: {
                                         name: "password",
+                                        "append-icon": _vm.show1
+                                          ? "mdi-eye"
+                                          : "mdi-eye-off",
+                                        type: _vm.show1 ? "text" : "password",
                                         label: "Contraseña"
+                                      },
+                                      on: {
+                                        "click:append": function($event) {
+                                          _vm.show1 = !_vm.show1
+                                        }
                                       },
                                       model: {
                                         value: _vm.form.password,
@@ -34489,21 +34543,10 @@ var render = function() {
                                 "h5",
                                 { staticClass: "headline text--secondary" },
                                 [
-                                  _c(
-                                    "v-btn",
-                                    { attrs: { icon: "", color: "primary" } },
-                                    [
-                                      _c("v-icon", [
-                                        _vm._v("mdi-arrow-left-circle")
-                                      ])
-                                    ],
-                                    1
-                                  ),
                                   _vm._v(
                                     "\n                                    Registrar Super Administrador\n                                "
                                   )
-                                ],
-                                1
+                                ]
                               )
                             ]),
                             _vm._v(" "),
@@ -34600,8 +34643,17 @@ var render = function() {
                                   [
                                     _c("v-text-field", {
                                       attrs: {
+                                        "append-icon": _vm.show1
+                                          ? "mdi-eye"
+                                          : "mdi-eye-off",
+                                        type: _vm.show1 ? "text" : "password",
                                         label: "Contraseña",
                                         "prepend-icon": "mdi-lock"
+                                      },
+                                      on: {
+                                        "click:append": function($event) {
+                                          _vm.show1 = !_vm.show1
+                                        }
                                       },
                                       model: {
                                         value: _vm.form.password,
@@ -34620,8 +34672,17 @@ var render = function() {
                                   [
                                     _c("v-text-field", {
                                       attrs: {
+                                        "append-icon": _vm.show2
+                                          ? "mdi-eye"
+                                          : "mdi-eye-off",
+                                        type: _vm.show2 ? "text" : "password",
                                         label: "Confirmar contraseña",
                                         "prepend-icon": "mdi-lock"
+                                      },
+                                      on: {
+                                        "click:append": function($event) {
+                                          _vm.show2 = !_vm.show2
+                                        }
                                       },
                                       model: {
                                         value: _vm.form.password_confirmation,
@@ -34834,11 +34895,11 @@ var render = function() {
                           _c("v-text-field", {
                             attrs: { label: "Numero de telefono" },
                             model: {
-                              value: _vm.form.number1,
+                              value: _vm.form.number,
                               callback: function($$v) {
-                                _vm.$set(_vm.form, "number1", $$v)
+                                _vm.$set(_vm.form, "number", $$v)
                               },
-                              expression: "form.number1"
+                              expression: "form.number"
                             }
                           })
                         ],
@@ -34851,11 +34912,11 @@ var render = function() {
                           _c("v-text-field", {
                             attrs: { label: "Correo" },
                             model: {
-                              value: _vm.form.mail1,
+                              value: _vm.form.mail,
                               callback: function($$v) {
-                                _vm.$set(_vm.form, "mail1", $$v)
+                                _vm.$set(_vm.form, "mail", $$v)
                               },
-                              expression: "form.mail1"
+                              expression: "form.mail"
                             }
                           })
                         ],
@@ -35028,7 +35089,22 @@ var render = function() {
                                           "v-card-text",
                                           [
                                             _c("v-text-field", {
-                                              attrs: { label: "Contraseña" },
+                                              attrs: {
+                                                label: "Contraseña",
+                                                "append-icon": _vm.show1
+                                                  ? "mdi-eye"
+                                                  : "mdi-eye-off",
+                                                type: _vm.show1
+                                                  ? "text"
+                                                  : "password"
+                                              },
+                                              on: {
+                                                "click:append": function(
+                                                  $event
+                                                ) {
+                                                  _vm.show1 = !_vm.show1
+                                                }
+                                              },
                                               model: {
                                                 value: _vm.form.password,
                                                 callback: function($$v) {
@@ -35049,8 +35125,23 @@ var render = function() {
                                           "v-card-text",
                                           [
                                             _c("v-text-field", {
+                                              staticClass:
+                                                "input-group--focused",
                                               attrs: {
-                                                label: "Confirmar Contraseña"
+                                                label: "Confirmar Contraseña",
+                                                "append-icon": _vm.show2
+                                                  ? "mdi-eye"
+                                                  : "mdi-eye-off",
+                                                type: _vm.show2
+                                                  ? "text"
+                                                  : "password"
+                                              },
+                                              on: {
+                                                "click:append": function(
+                                                  $event
+                                                ) {
+                                                  _vm.show2 = !_vm.show2
+                                                }
                                               },
                                               model: {
                                                 value:
@@ -35247,7 +35338,20 @@ var render = function() {
               headers: _vm.headers,
               items: _vm.items,
               "items-per-page": 5
-            }
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "item.type",
+                fn: function(ref) {
+                  var item = ref.item
+                  return [
+                    item.type
+                      ? _c("span", [_vm._v("Organización")])
+                      : _c("span", [_vm._v("Farmacia")])
+                  ]
+                }
+              }
+            ])
           })
         ],
         1

@@ -50,11 +50,14 @@
 
             <v-toolbar-title>Application</v-toolbar-title>
             <v-spacer></v-spacer>
-            <form method="POST" @submit.prevent="logout">
-                <v-btn outlined color="primary" type="submit">
-                    Cerrar Sesión
-                </v-btn>
-            </form>
+            <v-btn
+                type="button"
+                outlined
+                color="blue darken-3"
+                @click="logout()"
+                >Cerrar Sesión</v-btn
+            >
+            >
         </v-app-bar>
 
         <v-main>

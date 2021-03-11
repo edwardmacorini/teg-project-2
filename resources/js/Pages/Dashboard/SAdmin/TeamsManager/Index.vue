@@ -13,7 +13,10 @@
                     ></v-text-field>
                 </v-col>
                 <v-col cols="auto">
-                    <inertia-link :href="route('sadmin.orgs.create')" class="txnode">
+                    <inertia-link
+                        :href="route('sadmin.orgs.create')"
+                        class="txnode"
+                    >
                         <v-btn outlined color="blue darken-3" class="mr-5">
                             Nueva organización
                         </v-btn>
@@ -25,7 +28,12 @@
                 :items="items"
                 :items-per-page="5"
                 class="elavation-1 mt-5"
-            ></v-data-table>
+            >
+                <template v-slot:item.type={item}>
+                    <span v-if="item.type">Organización</span>
+                    <span v-else>Farmacia</span>
+                </template>
+            </v-data-table>
         </v-card>
     </admin-layout>
 </template>
@@ -36,7 +44,8 @@ import AdminLayout from "../../../../Layouts/AdminLayout";
 export default {
     props: {
         userData: Object,
-        teams: Array
+        teams: Array,
+        userList: Array
     },
     components: {
         AdminLayout
@@ -58,17 +67,54 @@ export default {
                     value: "rif"
                 },
                 {
+                    text: "Tipo",
+                    align: "center",
+                    sortable: true,
+                    value: "type"
+                },
+                {
                     text: "Usuario",
                     align: "center",
                     sortable: true,
-                    value: "user"
+                    value: "username"
                 }
             ],
             items: []
         };
     },
+    // created: function() {
+    //     this.getUsers();
+    // },
     mounted: function() {
-        this.items = this.teams;
+        this.teams.forEach(element => {
+            this.items.push({
+                name: element.name,
+                rif: element.rif,
+                type: element.type,
+                username: this.conUser(element.id)
+            });
+        });
+    },
+    methods: {
+        // getUsers() {
+        //     var self = this;
+        //     axios.get('/api/users/all/oadmin')
+        //         .then(function(response) {
+        //             console.log(response.data);
+        //             self.usersList = response.data
+        //         })
+        // },
+        conUser(id) {
+            var value;
+            this.userList.forEach(element => {
+                if(element.privileges == 'oadmin') {
+                    if(element.team_id == id) {
+                        value = element.username;
+                    }
+                }
+            });
+            return value;
+        }
     }
 };
 </script>

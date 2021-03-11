@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +29,8 @@ class SAdminController extends Controller
   {
     return Inertia::render('Dashboard/SAdmin/TeamsManager/Index', [
       'userData' => Auth::user(),
-      'teams' => Team::all()
+      'teams' => Team::all(),
+      'userList' => User::all()
     ]);
   }
 
@@ -44,24 +46,41 @@ class SAdminController extends Controller
   {
     
     Validator::make($request->all(), [
-      'name' => 'required|string|max:255',
-      'rif' => 'required|numeric|max:9|min:9|unique:teams',
+      'name' => 'required|string|max:50',
+      'rif' => 'required|numeric|min:9|unique:teams',
       'address' => 'required',
-      'number1' => 'required|max:16|min:11',
-      'mail1' => 'required|email|unique:teams',
-      'licence' => 'required|max:255',
+      'number' => 'required|max:11|min:11',
+      'mail' => 'required|email|unique:teams',
+      'licence' => 'required|max:50',
       'type' => 'required',
-      'userFullName' => 'required|string|max:255',
-      'username' => 'required|max:16|min:6',
+      'userFullName' => 'required|string|max:50',
+      'username' => 'required|max:20|min:6',
       'email' => 'required|email|unique:users',
       'password' => 'required|min:6|confirmed',
       ])->validate();
 
+      $aux = $request->input('type') == 'success' ? true : false;
+
       $team = Team::create([
         'name' => strtolower($request->input('name')),
+        'rif' => $request->input('rif'),
+        'address' => strtolower($request->input('address')),
+        'number' => $request->input('number'),
+        'mail' => strtolower($request->input('mail')),
+        'license' => strtolower($request->input('license')),
+        'type' => $aux
       ]);
 
-      dd($request);
+      User::create([
+        'name' => strtolower($request->input('userFullName')),
+        'username' => strtolower($request->input('username')),
+        'email' => strtolower($request->input('email')),
+        'password' => Hash::make($request->input('password')),
+        'team_id' => $team->id,
+        'privileges' => $request->input('privileges')
+      ]);
+
+      return redirect('sadmin-index');
 
   }
 
@@ -74,6 +93,5 @@ class SAdminController extends Controller
   {
     $org = Team::findOrFail($id);
     $org->delete();
-    return Inertia::render('Dashboard/SAdmin/TeamsManager/Index');
   }
 }

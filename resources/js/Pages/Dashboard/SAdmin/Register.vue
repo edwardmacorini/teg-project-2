@@ -9,11 +9,6 @@
                             <v-card elevation="2" class="px-5 py-10">
                                 <v-card-title>
                                     <h5 class="headline text--secondary">
-                                        <v-btn icon color="primary">
-                                            <v-icon
-                                                >mdi-arrow-left-circle</v-icon
-                                            >
-                                        </v-btn>
                                         Registrar Super Administrador
                                     </h5>
                                 </v-card-title>
@@ -49,6 +44,9 @@
                                     <v-row>
                                         <v-text-field
                                             v-model="form.password"
+                                            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                                            :type="show1 ? 'text' : 'password'"
+                                            @click:append="show1 = !show1"
                                             label="Contraseña"
                                             prepend-icon="mdi-lock"
                                         ></v-text-field>
@@ -56,6 +54,9 @@
                                     <v-row>
                                         <v-text-field
                                             v-model="form.password_confirmation"
+                                            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                                            :type="show2 ? 'text' : 'password'"
+                                            @click:append="show2 = !show2"
                                             label="Confirmar contraseña"
                                             prepend-icon="mdi-lock"
                                         ></v-text-field>
@@ -89,6 +90,8 @@ export default {
     },
     data() {
         return {
+            show1: false,
+            show2: false,
             form: this.$inertia.form({
                 name: "",
                 last_name: "",

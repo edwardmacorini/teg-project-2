@@ -39,13 +39,13 @@
                         <v-col>
                             <v-text-field
                                 label="Numero de telefono"
-                                v-model="form.number1"
+                                v-model="form.number"
                             ></v-text-field>
                         </v-col>
                         <v-col>
                             <v-text-field
                                 label="Correo"
-                                v-model="form.mail1"
+                                v-model="form.mail"
                             ></v-text-field>
                         </v-col>
                     </v-row>
@@ -106,6 +106,9 @@
                                             <v-card-text>
                                                 <v-text-field
                                                     label="Contraseña"
+                                                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                                                    :type="show1 ? 'text' : 'password'"
+                                                    @click:append="show1 = !show1"
                                                     v-model="form.password"
                                                 ></v-text-field>
                                             </v-card-text>
@@ -113,6 +116,10 @@
                                             <v-card-text>
                                                 <v-text-field
                                                     label="Confirmar Contraseña"
+                                                    :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                                                    :type="show2 ? 'text' : 'password'"
+                                                    class="input-group--focused"
+                                                    @click:append="show2 = !show2"
                                                     v-model="
                                                         form.password_confirmation
                                                     "
@@ -163,15 +170,17 @@ export default {
     },
     data() {
         return {
+            show1: false,
+            show2: false,
             dialog: false,
             form: this.$inertia.form({
                 name: null,
                 rif: null,
                 address: null,
-                number1: null,
-                mail1: null,
+                number: null,
+                mail: null,
                 licence: null,
-                type: 0,
+                type: null,
                 userFullName: null,
                 username: null,
                 email: null,
@@ -185,8 +194,9 @@ export default {
     methods: {
         submit() {
             this.form.post(this.route("sadmin.orgs.store"), {
-                onFinish: () =>
+                onFinish: () => {
                     this.form.reset("password", "password_confirmation")
+                }
             });
         },
     },
