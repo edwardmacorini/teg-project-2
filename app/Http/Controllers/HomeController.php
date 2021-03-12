@@ -17,22 +17,35 @@ class HomeController extends Controller
         'user' => 'user',
     );
 
-    public function index() {
-        if(Auth::check()) {
-            if(Auth::user()->privileges == $this->privileges['sadmin'])
-            return Inertia::render('Dashboard/SAdmin/TeamsManager/Index', [
-                'userData' => Auth::user(),
-                'teams' => Team::all(),
-                'userList' => User::all()
-              ]);
+    public function index()
+    {
+        if (Auth::check()) {
+            if (Auth::user()->privileges == $this->privileges['sadmin'])
+                return Inertia::render('Dashboard/SAdmin/TeamsManager/Index', [
+                    'userData' => Auth::user(),
+                    'teams' => Team::all(),
+                    'userList' => User::all()
+                ]);
+
+            else if (Auth::user()->privileges == $this->privileges['oadmin'] ||
+                     Auth::user()->privileges == $this->privileges['admin']) 
+            {
+                return Inertia::render('Dashboard/Admin/Index', [
+                    'userData' => Auth::user(),
+                    'teamData' => Team::find(Auth::user()->team_id)
+                ]);
+            } 
 
             else return Inertia::render('Forbiden');
-        }
 
+        } 
+        
         else return redirect('/');
+
     }
 
-    public function ladingpage() {
+    public function ladingpage()
+    {
         return "LadingPage";
     }
 }

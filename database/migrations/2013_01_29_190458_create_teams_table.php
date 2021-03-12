@@ -21,7 +21,7 @@ class CreateTeamsTable extends Migration
             $table->string('number');
             $table->string('mail');
             $table->string('license')->nullable();
-            $table->boolean('type');
+            $table->integer('type');
             $table->timestamps();
 
             

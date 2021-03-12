@@ -52,7 +52,6 @@ class SAdminController extends Controller
       'number' => 'required|max:11|min:11',
       'mail' => 'required|email|unique:teams',
       'licence' => 'required|max:50',
-      'type' => 'required',
       'userFullName' => 'required|string|max:50',
       'username' => 'required|max:20|min:6',
       'email' => 'required|email|unique:users',
@@ -80,7 +79,7 @@ class SAdminController extends Controller
         'privileges' => $request->input('privileges')
       ]);
 
-      return redirect('sadmin-index');
+      return redirect('/super-admin/orgs/index');
 
   }
 
