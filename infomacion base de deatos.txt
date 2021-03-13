@@ -1,0 +1,49 @@
+Beneficiado.
+Nombre completo
+Cedula
+fecha Nacionalidad
+discapacitado -> discapacitado
+Nacionalidad
+Direccion-> Direccion
+estado civil
+sexo
+profesion
+ocupacion
+Situacion economica -> Situacion economica
+num familia
+num hijos
+Tipo vivienda
+propiedad
+antecedente de salud -> antecedente de salud
+
+
+
+
+
+
+Direccion.
+Avenida
+Sector
+Estado
+Municipio
+Parroquia
+Ciudad
+Zona Postal
+Punto Referencia
+
+Situacion economica.
+nombre
+
+antecedente de salud.
+tipo_sangre
+cond_especiales
+antecedentes
+
+discapacitado.
+si o no
+descripcion
+
+Comprobante.
+descripcion
+compromenbante
+
