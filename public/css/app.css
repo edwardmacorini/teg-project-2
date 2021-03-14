@@ -18,3 +18,8 @@
 .radio {
     border-radius: 20px;
 }
+
+.card-user-register {
+    min-width: 700px;
+    margin-top: 30px;
+}
