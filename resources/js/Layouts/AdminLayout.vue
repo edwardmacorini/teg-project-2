@@ -13,7 +13,7 @@
             </v-row>
             <v-row justify="center">
                 <span class="blue--text headline subtitle-2 text-capitalize">
-                    {{rolName}} de {{teamData.name}}</span>
+                    {{rolName}} <span v-if="teamData">de {{teamData.name}}</span></span>
             </v-row>
             <v-row class="mt-5">
                 <v-divider></v-divider>
