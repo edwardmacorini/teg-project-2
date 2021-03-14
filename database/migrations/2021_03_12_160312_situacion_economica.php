@@ -17,7 +17,6 @@ class SituacionEconomica extends Migration
         Schema::create('situacion_economica', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->timestamps();
         });
 
         DB::table('situacion_economica')->insert([

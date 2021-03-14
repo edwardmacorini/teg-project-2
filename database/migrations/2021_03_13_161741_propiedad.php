@@ -21,7 +21,6 @@ class Propiedad extends Migration
 
         DB::table('propiedad')->insert([
             ['nombre' => 'propia'],
-            ['nombre' => 'rentada'],
             ['nombre' => 'alquilada'],
             ['nombre' => 'al cuido'],
         ]);

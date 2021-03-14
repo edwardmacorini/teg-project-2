@@ -16,9 +16,9 @@ class Beneficiados extends Migration
         Schema::create('beneficiados', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('tipoCedula');
-            $table->string('cedula');
-            $table->string('fechaNacimiento');
+            $table->string('tipoCedula', 1);
+            $table->string('cedula', 9);
+            $table->date('fechaNacimiento');
             $table->string('nacionalidad');
             $table->boolean('sexo');
             $table->integer('estadoCivil');
