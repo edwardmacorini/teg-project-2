@@ -22,7 +22,9 @@ class CreateProductsTable extends Migration
             $table->date('exportDate');
             $table->unsignedBigInteger('manufacturer_id');
             $table->foreign('manufacturer_id')->references('id')->on('manufacturers');
-            $table->decimal('pricig');
+            $table->decimal('pricing');
+            $table->unsignedBigInteger('team_id');
+            $table->foreign('team_id')->references('id')->on('teams');
             $table->timestamps();
         });
     }

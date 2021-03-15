@@ -5443,6 +5443,111 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -5450,15 +5555,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      items_tipoCedula: ['V', 'E'],
+      items_tipoCedula: ["V", "E"],
+      items_sexo: ["Masculino", "Femenino"],
+      items_situacionEconomica: [],
       menu: false,
+      e1: 1,
       form: {
         nombres: null,
         apellidos: null,
-        tipoCedula: 'V',
+        tipoCedula: "V",
         cedula: null,
         fechaNacimiento: new Date().toISOString().substr(0, 10),
-        nacionalidad: nacionalidad
+        nacionalidad: null,
+        sexo: "Masculino",
+        profesion: null,
+        ocupacion: null,
+        situacionEconomica: null
       }
     };
   }
@@ -36674,218 +36786,601 @@ var render = function() {
     [
       _c(
         "v-row",
-        { attrs: { justify: "center", align: "center" } },
+        {
+          staticStyle: { height: "100vh" },
+          attrs: { justify: "center", align: "center" }
+        },
         [
           _c(
-            "v-card",
-            { staticClass: "card-user-register" },
+            "v-stepper",
+            {
+              staticClass: "card-user-register",
+              model: {
+                value: _vm.e1,
+                callback: function($$v) {
+                  _vm.e1 = $$v
+                },
+                expression: "e1"
+              }
+            },
             [
               _c("v-card-title", [_vm._v("Formulario de registro")]),
               _vm._v(" "),
               _c("v-divider", { attrs: { color: "red" } }),
               _vm._v(" "),
               _c(
-                "v-card-text",
-                { staticClass: "px-15" },
+                "v-stepper-header",
                 [
                   _c(
-                    "v-row",
+                    "v-stepper-step",
+                    { attrs: { complete: _vm.e1 > 1, step: "1" } },
                     [
-                      _c(
-                        "v-col",
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Nombres" },
-                            model: {
-                              value: _vm.form.nombres,
-                              callback: function($$v) {
-                                _vm.$set(_vm.form, "nombres", $$v)
-                              },
-                              expression: "form.nombres"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Apellidos" },
-                            model: {
-                              value: _vm.form.apellidos,
-                              callback: function($$v) {
-                                _vm.$set(_vm.form, "apellidos", $$v)
-                              },
-                              expression: "form.apellidos"
-                            }
-                          })
-                        ],
-                        1
+                      _vm._v(
+                        "\n                    Informacion personal\n                "
                       )
-                    ],
-                    1
+                    ]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "v-row",
-                    [
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "1" } },
-                        [
-                          _c("v-select", {
-                            attrs: { items: _vm.items_tipoCedula },
-                            model: {
-                              value: _vm.form.tipoCedula,
-                              callback: function($$v) {
-                                _vm.$set(_vm.form, "tipoCedula", $$v)
-                              },
-                              expression: "form.tipoCedula"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Nro. Cedula", value: "V" },
-                            model: {
-                              value: _vm.form.cedula,
-                              callback: function($$v) {
-                                _vm.$set(_vm.form, "cedula", $$v)
-                              },
-                              expression: "form.cedula"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
+                  _c("v-divider"),
                   _vm._v(" "),
                   _c(
-                    "v-row",
+                    "v-stepper-step",
+                    { attrs: { complete: _vm.e1 > 2, step: "2" } },
+                    [
+                      _vm._v(
+                        "\n                    Informacion personal\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("v-divider"),
+                  _vm._v(" "),
+                  _c("v-stepper-step", { attrs: { step: "3" } }, [
+                    _vm._v(
+                      "\n                    Antecedentes de salud\n                "
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-stepper-items",
+                [
+                  _c(
+                    "v-stepper-content",
+                    { attrs: { step: "1" } },
                     [
                       _c(
-                        "v-col",
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Nacionalidad", value: "V" },
-                            model: {
-                              value: _vm.form.Nacionalidad,
-                              callback: function($$v) {
-                                _vm.$set(_vm.form, "Nacionalidad", $$v)
-                              },
-                              expression: "form.Nacionalidad"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
+                        "v-card",
+                        { staticClass: "mb-3 card-user-stepper" },
                         [
                           _c(
-                            "v-menu",
-                            {
-                              ref: "menu",
-                              attrs: {
-                                "close-on-content-click": false,
-                                "return-value": _vm.form.fechaNacimiento,
-                                transition: "scale-transition",
-                                "offset-y": "",
-                                "min-width": "auto"
-                              },
-                              on: {
-                                "update:returnValue": function($event) {
-                                  return _vm.$set(
-                                    _vm.form,
-                                    "fechaNacimiento",
-                                    $event
-                                  )
-                                },
-                                "update:return-value": function($event) {
-                                  return _vm.$set(
-                                    _vm.form,
-                                    "fechaNacimiento",
-                                    $event
-                                  )
-                                }
-                              },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "activator",
-                                  fn: function(ref) {
-                                    var on = ref.on
-                                    var attrs = ref.attrs
-                                    return [
-                                      _c(
-                                        "v-text-field",
-                                        _vm._g(
-                                          _vm._b(
-                                            {
-                                              attrs: {
-                                                label: "Fecha de nacimiento",
-                                                "preapend-icon": "mdi-calendar",
-                                                readonly: ""
-                                              },
-                                              model: {
-                                                value: _vm.form.fechaNacimiento,
-                                                callback: function($$v) {
-                                                  _vm.$set(
-                                                    _vm.form,
-                                                    "fechaNacimiento",
-                                                    $$v
-                                                  )
-                                                },
-                                                expression:
-                                                  "form.fechaNacimiento"
-                                              }
-                                            },
-                                            "v-text-field",
-                                            attrs,
-                                            false
-                                          ),
-                                          on
-                                        )
-                                      )
-                                    ]
-                                  }
-                                }
-                              ]),
-                              model: {
-                                value: _vm.menu,
-                                callback: function($$v) {
-                                  _vm.menu = $$v
-                                },
-                                expression: "menu"
-                              }
-                            },
+                            "v-card-text",
+                            { staticClass: "px-7" },
                             [
+                              _c(
+                                "v-row",
+                                [
+                                  _c(
+                                    "v-col",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "Nombres" },
+                                        model: {
+                                          value: _vm.form.nombres,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.form, "nombres", $$v)
+                                          },
+                                          expression: "form.nombres"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "Apellidos" },
+                                        model: {
+                                          value: _vm.form.apellidos,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.form, "apellidos", $$v)
+                                          },
+                                          expression: "form.apellidos"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
                               _vm._v(" "),
-                              _c("v-date-picker", {
-                                attrs: { "no-title": "", scrollable: "" },
-                                model: {
-                                  value: _vm.form.fechaNacimiento,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.form, "fechaNacimiento", $$v)
-                                  },
-                                  expression: "form.fechaNacimiento"
-                                }
-                              })
+                              _c(
+                                "v-row",
+                                [
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "1" } },
+                                    [
+                                      _c("v-select", {
+                                        attrs: { items: _vm.items_tipoCedula },
+                                        model: {
+                                          value: _vm.form.tipoCedula,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.form,
+                                              "tipoCedula",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "form.tipoCedula"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Nro. Cedula",
+                                          value: "V"
+                                        },
+                                        model: {
+                                          value: _vm.form.cedula,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.form, "cedula", $$v)
+                                          },
+                                          expression: "form.cedula"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          label: "Sexo",
+                                          items: _vm.items_sexo
+                                        },
+                                        model: {
+                                          value: _vm.form.sexo,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.form, "sexo", $$v)
+                                          },
+                                          expression: "form.sexo"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          label: "Estado Civil",
+                                          items: _vm.items_estadoCivil
+                                        },
+                                        model: {
+                                          value: _vm.form.estadoCivil,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.form,
+                                              "estadoCivil",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "form.estadoCivil"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-row",
+                                [
+                                  _c(
+                                    "v-col",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Nacionalidad",
+                                          value: "V"
+                                        },
+                                        model: {
+                                          value: _vm.form.nacionalidad,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.form,
+                                              "nacionalidad",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "form.nacionalidad"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    [
+                                      _c(
+                                        "v-menu",
+                                        {
+                                          ref: "menu",
+                                          attrs: {
+                                            "close-on-content-click": true,
+                                            "return-value":
+                                              _vm.form.fechaNacimiento,
+                                            transition: "scale-transition",
+                                            "offset-y": "",
+                                            "min-width": "auto"
+                                          },
+                                          on: {
+                                            "update:returnValue": function(
+                                              $event
+                                            ) {
+                                              return _vm.$set(
+                                                _vm.form,
+                                                "fechaNacimiento",
+                                                $event
+                                              )
+                                            },
+                                            "update:return-value": function(
+                                              $event
+                                            ) {
+                                              return _vm.$set(
+                                                _vm.form,
+                                                "fechaNacimiento",
+                                                $event
+                                              )
+                                            }
+                                          },
+                                          scopedSlots: _vm._u([
+                                            {
+                                              key: "activator",
+                                              fn: function(ref) {
+                                                var on = ref.on
+                                                var attrs = ref.attrs
+                                                return [
+                                                  _c(
+                                                    "v-text-field",
+                                                    _vm._g(
+                                                      _vm._b(
+                                                        {
+                                                          attrs: {
+                                                            label:
+                                                              "Fecha de nacimiento",
+                                                            "preapend-icon":
+                                                              "mdi-calendar",
+                                                            readonly: ""
+                                                          },
+                                                          model: {
+                                                            value:
+                                                              _vm.form
+                                                                .fechaNacimiento,
+                                                            callback: function(
+                                                              $$v
+                                                            ) {
+                                                              _vm.$set(
+                                                                _vm.form,
+                                                                "fechaNacimiento",
+                                                                $$v
+                                                              )
+                                                            },
+                                                            expression:
+                                                              "\n                                                    form.fechaNacimiento\n                                                "
+                                                          }
+                                                        },
+                                                        "v-text-field",
+                                                        attrs,
+                                                        false
+                                                      ),
+                                                      on
+                                                    )
+                                                  )
+                                                ]
+                                              }
+                                            }
+                                          ]),
+                                          model: {
+                                            value: _vm.menu,
+                                            callback: function($$v) {
+                                              _vm.menu = $$v
+                                            },
+                                            expression: "menu"
+                                          }
+                                        },
+                                        [
+                                          _vm._v(" "),
+                                          _c("v-date-picker", {
+                                            attrs: {
+                                              "no-title": "",
+                                              scrollable: ""
+                                            },
+                                            model: {
+                                              value: _vm.form.fechaNacimiento,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "fechaNacimiento",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "form.fechaNacimiento"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
                             ],
                             1
                           )
                         ],
                         1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "primary" },
+                          on: {
+                            click: function($event) {
+                              _vm.e1 = 2
+                            }
+                          }
+                        },
+                        [_vm._v("Siguiente")]
                       )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-stepper-content",
+                    { attrs: { step: "2" } },
+                    [
+                      _c(
+                        "v-card",
+                        { staticClass: "mb-3 card-user-stepper" },
+                        [
+                          _c(
+                            "v-card-text",
+                            { staticClass: "px-7" },
+                            [
+                              _c(
+                                "v-row",
+                                [
+                                  _c(
+                                    "v-col",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "Profesión" },
+                                        model: {
+                                          value: _vm.form.profesion,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.form, "profesion", $$v)
+                                          },
+                                          expression: "form.profesion"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "Ocupación" },
+                                        model: {
+                                          value: _vm.form.ocupacion,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.form, "ocupacion", $$v)
+                                          },
+                                          expression: "form.ocupacion"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          label: "Situación Economica",
+                                          items: _vm.items_situacionEconomica
+                                        },
+                                        model: {
+                                          value: _vm.form.situacionEconomica,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.form,
+                                              "situacionEconomica",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "form.situacionEconomica"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-row",
+                                [
+                                  _c(
+                                    "v-col",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Cantidad de grupo familiar"
+                                        },
+                                        model: {
+                                          value: _vm.form.numFamilia,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.form,
+                                              "numFamilia",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "form.numFamilia"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "Cantidad de hijos" },
+                                        model: {
+                                          value: _vm.form.numHijos,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.form, "numHijos", $$v)
+                                          },
+                                          expression: "form.numHijos"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "Tipo de vivienda" },
+                                        model: {
+                                          value: _vm.form.tipoVivienda,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.form,
+                                              "tipoVivienda",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "form.tipoVivienda"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "Cantidad de hijos" },
+                                        model: {
+                                          value: _vm.form.numHijos,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.form, "numHijos", $$v)
+                                          },
+                                          expression: "form.numHijos"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "error" },
+                          on: {
+                            click: function($event) {
+                              _vm.e1 = 1
+                            }
+                          }
+                        },
+                        [_vm._v("Atras")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "primary" },
+                          on: {
+                            click: function($event) {
+                              _vm.e1 = 3
+                            }
+                          }
+                        },
+                        [_vm._v("Siguiente")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-stepper-content",
+                    { attrs: { step: "3" } },
+                    [
+                      _c(
+                        "v-card",
+                        { staticClass: "mb-3 card-user-stepper" },
+                        [_c("v-card-text", { staticClass: "px-7" })],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "error" },
+                          on: {
+                            click: function($event) {
+                              _vm.e1 = 2
+                            }
+                          }
+                        },
+                        [_vm._v("Atras")]
+                      ),
+                      _vm._v(" "),
+                      _c("v-btn", { attrs: { color: "success" } }, [
+                        _vm._v("Completar registro")
+                      ])
                     ],
                     1
                   )
@@ -36897,8 +37392,7 @@ var render = function() {
           )
         ],
         1
-      ),
-      _c("br")
+      )
     ],
     1
   )
