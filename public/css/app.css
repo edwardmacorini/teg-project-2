@@ -20,6 +20,14 @@
 }
 
 .card-user-register {
-    min-width: 700px;
-    margin-top: 30px;
+    min-width: 750px;
+    width: 750px;
+    max-width: 750px;
+    padding: 0;
+}
+
+.card-user-stepper {
+    min-height: 350px;
+    max-height: 350px;
+    height: 350px;
 }
