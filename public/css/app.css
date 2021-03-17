@@ -18,16 +18,3 @@
 .radio {
     border-radius: 20px;
 }
-
-.card-user-register {
-    min-width: 750px;
-    width: 750px;
-    max-width: 750px;
-    padding: 0;
-}
-
-.card-user-stepper {
-    min-height: 350px;
-    max-height: 350px;
-    height: 350px;
-}

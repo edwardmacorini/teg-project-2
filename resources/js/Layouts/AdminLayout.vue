@@ -139,7 +139,7 @@ export default {
     methods: {
         logout() {
             this.$inertia.post(route("logout"));
-            location.reload()
+            location.replace('/home');
             // location.href = "/home";
         }
     }
