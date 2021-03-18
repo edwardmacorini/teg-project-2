@@ -20,21 +20,23 @@ class Beneficiados extends Migration
             $table->string('cedula', 9);
             $table->date('fechaNacimiento');
             $table->string('nacionalidad');
-            $table->boolean('sexo');
-            $table->integer('estadoCivil');
+            $table->string('sexo');
+            $table->string('estadoCivil');
             $table->string('profesion');
             $table->string('ocupacion');
             $table->integer('cantidadFamilia');
             $table->integer('cantidadHijos');
-            $table->integer('tipoVivienda');
-            $table->integer('propiedad');
+            $table->string('tipoVivienda');
+            $table->string('propiedad');
             $table->unsignedBigInteger('direccion');
             $table->foreign('direccion')->references('id')->on('direccion');
-            $table->integer('situacion_economica');
+            $table->string('situacion_economica');
             $table->unsignedBigInteger('antecedentes_salud');
             $table->foreign('antecedentes_salud')->references('id')->on('antecedentes_salud');
             $table->unsignedBigInteger('discapacitado');
             $table->foreign('discapacitado')->references('id')->on('discapacitado');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

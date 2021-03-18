@@ -30,13 +30,19 @@
 
                             <v-divider></v-divider>
 
-                            <v-stepper-step step="3">
+                            <v-stepper-step :complete="e1 > 3" step="3">
                                 Paso 3
                             </v-stepper-step>
 
                             <v-divider></v-divider>
 
-                            <v-stepper-step step="4">
+                            <v-stepper-step :complete="e1 > 4" step="4">
+                                Paso 4
+                            </v-stepper-step>
+
+                            <v-divider></v-divider>
+
+                            <v-stepper-step step="5">
                                 Paso Final
                             </v-stepper-step>
                         </v-stepper-header>
@@ -79,7 +85,7 @@
                                             <v-col>
                                                 <v-text-field
                                                     label="Nº cedula"
-                                                    v-model="form.apellidos"
+                                                    v-model="form.cedula"
                                                     outlined
                                                 ></v-text-field>
                                             </v-col>
@@ -171,7 +177,7 @@
                                             <v-col>
                                                 <v-select
                                                     v-model="form.estadoCivil"
-                                                    :items="items_estadoCIvil"
+                                                    :items="items_estadoCivil"
                                                     label="Estado Civil"
                                                     outlined
                                                 ></v-select>
@@ -282,7 +288,7 @@
                                     height="550px"
                                     elevation="0"
                                 >
-                                    <v-text-card class="px-md-7">
+                                    <v-card-text class="px-md-7">
                                         <v-row>
                                             <v-col cols="12">
                                                 <p class="mt-md-n3">
@@ -320,14 +326,18 @@
                                                     type="text"
                                                     label="Antecedentes médicos"
                                                     v-model="
-                                                        form.cond_especiales
+                                                        form.antecedentes
                                                     "
                                                     outlined
                                                 ></v-text-field>
                                             </v-col>
                                         </v-row>
                                         <v-row class="mt-n3">
-                                            <v-col cols="12" md="5" class="my-n5 my-md-0">
+                                            <v-col
+                                                cols="12"
+                                                md="5"
+                                                class="my-n5 my-md-0"
+                                            >
                                                 <v-radio-group
                                                     v-model="
                                                         form.isDiscapacitado
@@ -354,8 +364,8 @@
                                                     :disabled="
                                                         form.isDiscapacitado !=
                                                         1
-                                                            ? ''
-                                                            : disabled
+                                                            ? true
+                                                            : false
                                                     "
                                                     type="text"
                                                     label="¿Que discapacidad posee?"
@@ -366,7 +376,7 @@
                                                 ></v-text-field>
                                             </v-col>
                                         </v-row>
-                                    </v-text-card>
+                                    </v-card-text>
                                 </v-card>
 
                                 <v-btn color="primary" @click="e1 = 4">
@@ -380,17 +390,88 @@
 
                             <v-stepper-content step="4">
                                 <v-card
+                                    class="mb-10 mb-md-12 pt-15"
+                                    height="550px"
+                                    elevation="0"
+                                >
+                                    <v-card-text class="px-md-7">
+                                        <v-row>
+                                            <v-text-field
+                                                outlined
+                                                v-model="form.username"
+                                                label="Nombre de usuario"
+                                                prepend-icon="mdi-account"
+                                            ></v-text-field>
+                                        </v-row>
+                                        <v-row>
+                                            <v-text-field
+                                                outlined
+                                                v-model="form.email"
+                                                label="Correo"
+                                                prepend-icon="mdi-email"
+                                            ></v-text-field>
+                                        </v-row>
+                                        <v-row>
+                                            <v-text-field
+                                                outlined
+                                                v-model="form.password"
+                                                :append-icon="
+                                                    show1
+                                                        ? 'mdi-eye'
+                                                        : 'mdi-eye-off'
+                                                "
+                                                :type="
+                                                    show1 ? 'text' : 'password'
+                                                "
+                                                @click:append="show1 = !show1"
+                                                label="Contraseña"
+                                                prepend-icon="mdi-lock"
+                                            ></v-text-field>
+                                        </v-row>
+                                        <v-row>
+                                            <v-text-field
+                                                outlined
+                                                v-model="
+                                                    form.password_confirmation
+                                                "
+                                                :append-icon="
+                                                    show2
+                                                        ? 'mdi-eye'
+                                                        : 'mdi-eye-off'
+                                                "
+                                                :type="
+                                                    show2 ? 'text' : 'password'
+                                                "
+                                                @click:append="show2 = !show2"
+                                                label="Confirmar contraseña"
+                                                prepend-icon="mdi-lock"
+                                            ></v-text-field>
+                                        </v-row>
+                                    </v-card-text>
+                                </v-card>
+
+                                <v-btn color="primary" @click="e1 = 5">
+                                    Continuar
+                                </v-btn>
+
+                                <v-btn text color="red" @click="e1 = 3">
+                                    Atras
+                                </v-btn>
+                            </v-stepper-content>
+
+                            <v-stepper-content step="5">
+                                <v-card
                                     class="mb-10 mb-md-12"
                                     height="550px"
                                     elevation="0"
                                 >
-                                    <v-text-card class="px-md-7">
+                                    <v-card-text class="px-md-7">
                                         <v-row class="mt-n3">
                                             <v-col>
                                                 <v-alert
                                                     dense
                                                     type="warning"
-                                                    value="true"
+                                                    :value="true"
                                                     class="text-justify"
                                                 >
                                                     Es importante utilizar la
@@ -476,283 +557,68 @@
                                                 ></v-text-field>
                                             </v-col>
                                         </v-row>
-                                    </v-text-card>
+                                    </v-card-text>
                                 </v-card>
 
                                 <v-btn color="success" type="submit">
                                     Completar Formulario
                                 </v-btn>
 
-                                <v-btn text color="red" @click="e1 = 3">
+                                <v-btn text color="red" @click="e1 = 4">
                                     Atras
                                 </v-btn>
                             </v-stepper-content>
                         </v-stepper-items>
                     </v-stepper>
                 </v-col>
-
-                <!-- <v-stepper v-model="e1" class="card-user-register">
-                <v-card-title>
-                    <v-row align="end" class="mb-1">
-                        <v-img src="/assets/logo.jpeg" max-width="100"></v-img>
-                        Formulario de registro
-                    </v-row>
-                </v-card-title>
-                <div class="line-shadow"></div>
-                <v-stepper-header>
-                    <v-stepper-step :complete="e1 > 1" step="1">
-                        Informacion personal
-                    </v-stepper-step>
-                    <v-divider></v-divider>
-                    <v-stepper-step :complete="e1 > 2" step="2">
-                        Informacion personal
-                    </v-stepper-step>
-                    <v-divider></v-divider>
-                    <v-stepper-step step="3">
-                        Antecedentes de salud
-                    </v-stepper-step>
-                </v-stepper-header>
-                <v-stepper-items> -->
-                <!-- <v-stepper-content step="1">
-                        <div class="mb-3 card-user-stepper">
-                            <v-card-text class="px-md-7">
-                                <v-row>
-                                    <v-col cols="12" md="6">
-                                        <v-text-field
-                                            label="Nombres"
-                                            v-model="form.nombres"
-                                        ></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" md="6">
-                                        <v-text-field
-                                            label="Apellidos"
-                                            v-model="form.apellidos"
-                                        ></v-text-field>
-                                    </v-col>
-                                </v-row>
-                                <v-row>
-                                    <v-col cols="3" md="2">
-                                        <v-select
-                                            :items="items_tipoCedula"
-                                            v-model="form.tipoCedula"
-                                        ></v-select>
-                                    </v-col>
-                                    <v-col cols="8" md="10">
-                                        <v-text-field
-                                            label="Nro. Cedula"
-                                            v-model="form.cedula"
-                                            value="V"
-                                        ></v-text-field>
-                                    </v-col>
-                                    <v-col cols="6" md="6">
-                                        <v-select
-                                            label="Sexo"
-                                            :items="items_sexo"
-                                            v-model="form.sexo"
-                                        ></v-select>
-                                    </v-col>
-                                    <v-col cols="6" md="6">
-                                        <v-select
-                                            label="Estado Civil"
-                                            :items="items_estadoCivil"
-                                            v-model="form.estadoCivil"
-                                        ></v-select>
-                                    </v-col>
-                                </v-row>
-                            </v-card-text>
-                        </div>
-                        <v-btn color="primary" @click="e1 = 2">Siguiente</v-btn>
-                    </v-stepper-content>
-                    <v-stepper-content step="2">
-                        <div class="mb-3 card-user-stepper">
-                            <v-card-text class="px-md-7">
-                                <v-row>
-                                    <v-col>
-                                        <v-menu
-                                            ref="menu"
-                                            v-model="menu"
-                                            :close-on-content-click="false"
-                                            :return-value.sync="
-                                                form.fechaNacimiento
-                                            "
-                                            transition="scale-transition"
-                                            offset-y
-                                            min-width="auto"
-                                        >
-                                            <template
-                                                v-slot:activator="{ on, attrs }"
-                                            >
-                                                <v-text-field
-                                                    v-model="
-                                                        form.fechaNacimiento
-                                                    "
-                                                    label="Fecha de nacimiento"
-                                                    preapend-icon="mdi-calendar"
-                                                    readonly
-                                                    v-bind="attrs"
-                                                    v-on="on"
-                                                ></v-text-field>
-                                            </template>
-                                            <v-date-picker
-                                                v-model="form.fechaNacimiento"
-                                                no-title
-                                                scrollable
-                                            >
-                                                <v-spacer></v-spacer>
-                                                <v-btn
-                                                    text
-                                                    color="primary"
-                                                    @click="menu = false"
-                                                >
-                                                    Cancel
-                                                </v-btn>
-                                                <v-btn
-                                                    text
-                                                    color="primary"
-                                                    @click="
-                                                        $refs.menu.save(date)
-                                                    "
-                                                >
-                                                    OK
-                                                </v-btn>
-                                            </v-date-picker>
-                                        </v-menu>
-                                    </v-col>
-                                    <v-col cols="6">
-                                        <v-text-field
-                                            label="Nacionalidad"
-                                            v-model="form.nacionalidad"
-                                            value="V"
-                                        ></v-text-field>
-                                    </v-col>
-                                </v-row>
-                                <v-row>
-                                    <v-col cols="6">
-                                        <v-text-field
-                                            label="Profesión"
-                                            v-model="form.profesion"
-                                        ></v-text-field>
-                                    </v-col>
-                                    <v-col cols="6">
-                                        <v-text-field
-                                            label="Ocupación"
-                                            v-model="form.ocupacion"
-                                        ></v-text-field>
-                                    </v-col>
-                                </v-row>
-                                <v-row>
-                                    <v-col cols="6">
-                                        <v-text-field
-                                            label="Nº grupo familiar"
-                                            v-model="form.numFamilia"
-                                        ></v-text-field>
-                                    </v-col>
-                                    <v-col cols="6">
-                                        <v-text-field
-                                            label="Nº de hijos"
-                                            v-model="form.numHijos"
-                                        ></v-text-field>
-                                    </v-col>
-                                    <v-col cols="6">
-                                        <v-select
-                                            label="Tipo de vivienda"
-                                            :items="items_tipoVivienda"
-                                            v-model="form.tipoVivienda"
-                                        ></v-select>
-                                    </v-col>
-                                    <v-col cols="6">
-                                        <v-select
-                                            label="Situación Economica"
-                                            :items="items_situacionEconomica"
-                                            v-model="form.situacionEconomica"
-                                        ></v-select>
-                                    </v-col>
-                                </v-row>
-                            </v-card-text>
-                        </div>
-                        <v-btn color="error" @click="e1 = 1">Atras</v-btn>
-                        <v-btn color="primary" @click="e1 = 3">Siguiente</v-btn>
-                    </v-stepper-content>
-                    <v-stepper-content step="3">
-                        <div class="mb-3 card-user-stepper">
-                            <v-card-text class="px-md-7">
-                                <v-row>
-                                    <v-col cols="12">
-                                        <p class="mt-n3">
-                                            ¿A que grupo sanguíneo pertenece?
-                                        </p>
-                                        <v-select
-                                            :items="items_tipo_sangre"
-                                            v-model="form.tipo_sangre"
-                                            label="Grupo sanguineo"
-                                            outlined
-                                        ></v-select>
-                                    </v-col>
-                                    <v-col cols="12">
-                                        <p class="mt-n3">
-                                            ¿Posee alguna condicion especial?
-                                        </p>
-                                        <v-text-field
-                                            type="text"
-                                            label="Condicion especial"
-                                            v-model="form.cond_especiales"
-                                            outlined
-                                        ></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12">
-                                        <p class="mt-n3">
-                                            ¿Posee antecedentes medicos? De ser
-                                            asi mencionarlos
-                                        </p>
-                                        <v-textarea
-                                            outlined
-                                            label=""
-                                            v-model="form.antecedentes"
-                                            rows="2"
-                                            row-height="15"
-                                        ></v-textarea>
-                                    </v-col>
-                                </v-row>
-                            </v-card-text>
-                        </div>
-                        <v-btn color="error" @click="e1 = 2">Atras</v-btn>
-                        <v-btn color="success">Completar registro</v-btn>
-                    </v-stepper-content> -->
-                <!-- </v-stepper-items>
-            </v-stepper> -->
-                <!--  -->
             </v-row>
         </form>
+        {{ errors }}
     </default-layout>
 </template>
 
 <script>
 import DefaultLayout from "../../../Layouts/DefaultLayout";
 export default {
+    props: {
+        estadoCivil: Array,
+        tipoVivienda: Array,
+        propiedad: Array,
+        situacionEconomica: Array,
+        tipo_sangre: Array,
+        errors: Object
+    },
     components: {
         DefaultLayout
     },
     data() {
         return {
+            show1: false,
+            show2: false,
             items_tipoCedula: ["V", "E"],
             items_sexo: ["Masculino", "Femenino"],
             items_tipoVivienda: [],
             items_situacionEconomica: [],
             items_estadoCivil: [],
             items_tipo_sangre: [],
+            items_propiedad: [],
             menu: false,
             e1: 1,
-            form: {
+            form: this.$inertia.form({
                 nombres: null,
                 apellidos: null,
                 tipoCedula: "V",
                 cedula: null,
-                fechaNacimiento: new Date().toISOString().substr(0, 10),
+                fechaNacimiento: null,
                 nacionalidad: null,
                 sexo: "Masculino",
+                estadoCivil: null,
                 profesion: null,
                 ocupacion: null,
+                familia: null,
+                hijos: null,
                 tipoVivienda: null,
+                propiedad: null,
                 situacionEconomica: null,
                 tipo_sangre: null,
                 cond_especiales: null,
@@ -766,12 +632,43 @@ export default {
                 parroquia: null,
                 ciudad: null,
                 zonaPostal: null,
-                referencia: null
-            }
+                referencia: null,
+                username: null,
+                email: null,
+                password: null,
+                password_confirmation: null,
+            })
         };
     },
+    watch: {
+        errors(errors) {
+            if (errors) {
+                this.$swal.fire({
+                    icon: "error",
+                    title: "Hubo un error",
+                    text: "Por favor corrija la información"
+                });
+            }
+        }
+    },
+    mounted: function() {
+        this.tipoVivienda.forEach(el =>
+            this.items_tipoVivienda.push(el.nombre)
+        );
+        this.estadoCivil.forEach(el => this.items_estadoCivil.push(el.nombre));
+        this.propiedad.forEach(el => this.items_propiedad.push(el.nombre));
+        this.tipo_sangre.forEach(el => this.items_tipo_sangre.push(el.nombre));
+        this.situacionEconomica.forEach(el =>
+            this.items_situacionEconomica.push(el.nombre)
+        );
+    },
     methods: {
-        onsubmit() {}
+        onSubmit() {
+            this.form.post(this.route("user-register-store"), {
+                onFinish: () =>
+                    this.form.reset("password", "password_confirmation")
+            });
+        }
     }
 };
 </script>
