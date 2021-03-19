@@ -3,7 +3,7 @@
         <v-row justify="center" align="center">
             <v-col cols="9">
                 <v-card elevation="8" class="mt-5 px-5 py-10 radio">
-                    <h2>Listado de censos activos</h2>
+                    <h2>Listado de censos</h2>
                     <v-row justify="space-between" align="center" class="mt-1">
                         <v-col></v-col>
                         <v-col cols="auto">
@@ -30,6 +30,9 @@
                         <template v-slot:item.type="{ item }">
                             <span v-if="item.type">Organización</span>
                             <span v-else>Farmacia</span>
+                        </template>
+                        <template v-slot:no-data>
+                            No poseé ningún censo
                         </template>
                     </v-data-table>
                 </v-card>

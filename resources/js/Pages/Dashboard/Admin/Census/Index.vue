@@ -1,10 +1,12 @@
 <template>
-    <admin-layout 
-        :userData="userData" 
-        :rolName="userData.privileges == 'oadmin' ? 'Administrador' : 'Empleado'"
+    <admin-layout
+        :userData="userData"
+        :rolName="
+            userData.privileges == 'oadmin' ? 'Administrador' : 'Empleado'
+        "
         :teamData="teamData"
-        >
-            <v-card elevation="8" class="mx-10 mt-5 px-5 py-10 radio">
+    >
+        <v-card elevation="8" class="mx-10 mt-5 px-5 py-10 radio">
             <h2>Listado de solicitudes</h2>
             <!-- <v-row justify="space-between" align="center">
                 <v-col cols="5">
@@ -33,6 +35,9 @@
                 :items-per-page="5"
                 class="elavation-1 mt-5"
             >
+                <template v-slot:item.resumen="{ item }">
+                    <v-icon class="mr-3" color="success">mdi-clipboard-arrow-up</v-icon>
+                </template>
             </v-data-table>
         </v-card>
     </admin-layout>
@@ -56,39 +61,45 @@ export default {
                     text: "Beneficiado",
                     align: "center",
                     sortable: true,
-                    value: ""
+                    value: "nombre"
                 },
                 {
                     text: "Cedula",
                     align: "center",
                     sortable: true,
-                    value: ""
+                    value: "cedula"
                 },
                 {
                     text: "Nacionalidad",
                     align: "center",
                     sortable: true,
-                    value: ""
+                    value: "nacionalidad"
                 },
                 {
                     text: "Tipo de beneficio",
                     align: "center",
                     sortable: true,
-                    value: ""
+                    value: "tipo_beneficio"
                 },
                 {
                     text: "Resumen",
                     align: "center",
                     sortable: true,
-                    value: ""
+                    value: "resumen"
                 }
             ],
             items: []
-        }
+        };
     },
     mounted: function() {
+        this.items.push({
+            nombre: "Edward Macorini",
+            cedula: "V26529492",
+            nacionalidad: "Venezolano",
+            tipo_beneficio: "Insumos Medicos",
+            resumen: "1"
+        });
     },
-    methods: {
-    }
+    methods: {}
 };
 </script>

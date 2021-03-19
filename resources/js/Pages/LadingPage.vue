@@ -17,8 +17,10 @@
                                     >
                                         <v-col cols="auto">
                                             <v-img
-                                                src="/assets/logo.png"
+                                                style="border-radius:15px;"
+                                                src="/assets/logo.jpeg"
                                                 width="150px"
+                                                class="elevation-8"
                                             ></v-img>
                                         </v-col>
                                         <v-col cols="12" md="8">
