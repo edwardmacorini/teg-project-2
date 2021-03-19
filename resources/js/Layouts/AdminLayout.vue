@@ -3,7 +3,7 @@
         <v-navigation-drawer app dark permanent color="#0E0742">
             <v-row justify="center" class="mt-10">
                 <v-avatar color="indigo" size="98">
-                    <span class="white--text headline">EM</span>
+                    <span class="white--text headline">IS</span>
                 </v-avatar>
             </v-row>
             <v-row justify="center" class="mt-5">
@@ -109,7 +109,8 @@
             <inertia-link
                 :href="route('sadmin-index')"
                 style="text-decoration: none;"
-                v-if="userData.privileges == 'oadmin'"
+                v-if="userData.privileges == 'oadmin' ||
+                      userData.privileges == 'sadmin'"
             >
                 <v-row class="mt-5">
                     <v-col cols="12" class="text-center">
