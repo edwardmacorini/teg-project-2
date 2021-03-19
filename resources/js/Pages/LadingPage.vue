@@ -17,7 +17,7 @@
                                     >
                                         <v-col cols="auto">
                                             <v-img
-                                                src="/assets/logo.jpeg"
+                                                src="/assets/logo.png"
                                                 width="150px"
                                             ></v-img>
                                         </v-col>
