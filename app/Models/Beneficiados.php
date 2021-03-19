@@ -18,6 +18,7 @@ class Beneficiados extends Model
         'fechaNacimiento',
         'nacionalidad',
         'sexo',
+        'phone',
         'estadoCivil',
         'profesion',
         'ocupacion',

@@ -61,6 +61,28 @@
                     </v-col>
                 </v-row>
             </inertia-link>
+
+            <inertia-link
+                :href="route('admin-products-index')"
+                style="text-decoration: none;"
+                v-if="((userData.privileges == 'oadmin' || userData.privileges == 'admin'))"
+            >
+                <v-row class="mt-5">
+                    <v-col cols="12" class="text-center">
+                        <v-icon
+                            style="font-size: 4em; border: none; text-decoration: none;"
+                        >
+                            mdi-archive-outline
+                        </v-icon>
+                    </v-col>
+                    <v-col
+                        cols="12"
+                        class="text-center subtitle-1 mt-n5 white--text"
+                    >
+                        Gestor de productos
+                    </v-col>
+                </v-row>
+            </inertia-link>
             
             <inertia-link
                 :href="route('sadmin-index')"
@@ -113,7 +135,7 @@
             <!-- <v-app-bar-nav-icon 
             @click="drawer = !drawer"></v-app-bar-nav-icon> -->
 
-            <v-toolbar-title>Application</v-toolbar-title>
+            <v-toolbar-title>Panel de administración Medicease</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn
                 type="button"

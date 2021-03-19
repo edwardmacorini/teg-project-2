@@ -29,5 +29,5 @@ use Illuminate\Support\Facades\Route;
 //     return Inertia::render('Dashboard');
 // })->name('dashboard');
 
-Route::get('/', [HomeController::class, 'ladingpage']);
+Route::get('/', [HomeController::class, 'ladingpage'])->name('ladingpage');
 Route::get('/home', [HomeController::class, 'index'])->name('home');

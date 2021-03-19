@@ -34,9 +34,16 @@ class HomeController extends Controller
                     'userData' => Auth::user(),
                     'teamData' => Team::find(Auth::user()->team_id)
                 ]);
-            } 
+            }
+            
+            else if (Auth::user()->privileges == $this->privileges['user']) 
+            {
+                return Inertia::render('Dashboard/User/CensusManager/Index', [
+                    'userData' => Auth::user()
+                ]);
+            }
 
-            else return Inertia::render('Forbiden');
+            else return redirect('/');
 
         } 
         
@@ -46,6 +53,6 @@ class HomeController extends Controller
 
     public function ladingpage()
     {
-        return "LadingPage";
+        return Inertia::render('LadingPage');
     }
 }

@@ -7,7 +7,7 @@
                 style="min-height: 100vh;"
             >
                 <v-col cols="12" sm="10" md="8">
-                    <v-stepper v-model="e1">
+                    <v-stepper v-model="e1" class="elevation-8">
                         <v-card-title>
                             <v-row align="end" class="mb-1">
                                 <v-img
@@ -189,10 +189,14 @@
                                 <v-btn color="primary" @click="e1 = 2">
                                     Continuar
                                 </v-btn>
-
-                                <v-btn text>
-                                    Cancelar
-                                </v-btn>
+                                <inertia-link
+                                    :href="route('ladingpage')"
+                                    style="text-decoration: none;"
+                                >
+                                    <v-btn text>
+                                        Cancelar
+                                    </v-btn>
+                                </inertia-link>
                             </v-stepper-content>
 
                             <v-stepper-content step="2">
@@ -325,9 +329,7 @@
                                                 <v-text-field
                                                     type="text"
                                                     label="Antecedentes médicos"
-                                                    v-model="
-                                                        form.antecedentes
-                                                    "
+                                                    v-model="form.antecedentes"
                                                     outlined
                                                 ></v-text-field>
                                             </v-col>
@@ -409,6 +411,14 @@
                                                 v-model="form.email"
                                                 label="Correo"
                                                 prepend-icon="mdi-email"
+                                            ></v-text-field>
+                                        </v-row>
+                                        <v-row>
+                                            <v-text-field
+                                                outlined
+                                                v-model="form.phone"
+                                                label="Numero de telefono"
+                                                prepend-icon="mdi-phone"
                                             ></v-text-field>
                                         </v-row>
                                         <v-row>
@@ -635,8 +645,9 @@ export default {
                 referencia: null,
                 username: null,
                 email: null,
+                phone: null,
                 password: null,
-                password_confirmation: null,
+                password_confirmation: null
             })
         };
     },

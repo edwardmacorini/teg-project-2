@@ -14,7 +14,7 @@
                         hide-details
                     ></v-switch>
                 </v-row>
-                <form @submit.prevent="logout" class="px-5">
+                <form @submit.prevent="submit()" class="px-5">
                     <v-row>
                         <v-text-field
                             label="Nombre"

@@ -8,6 +8,9 @@ Route::get('/admin/login', [AdminController::class, 'login']);
 
 // Census Routes
 Route::get('/admin/census/index', [AdminController::class, 'censusIndex'])->name('admin-census-index');
+Route::get('/admin/products/index', [AdminController::class, 'productsIndex'])->name('admin-products-index');
+Route::get('/admin/products/create', [AdminController::class, 'productsCreate'])->name('admin-products-create');
+Route::post('/admin/products/store', [AdminController::class, 'productsStore'])->name('admin-products-store');
 
 // Route Configuration for oadmin manager
 

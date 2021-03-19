@@ -16,13 +16,13 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('unit');
-            $table->date('manufacturerDate');
-            $table->date('importDate');
-            $table->date('exportDate');
-            $table->unsignedBigInteger('manufacturer_id');
-            $table->foreign('manufacturer_id')->references('id')->on('manufacturers');
-            $table->decimal('pricing');
+            $table->string('descripcion')->nullable();
+            $table->string('unit')->nullable();
+            $table->date('manufacturerDate')->nullable();
+            $table->date('importDate')->nullable();
+            $table->date('exportDate')->nullable();
+            $table->integer('manufacturer_id')->nullable();
+            $table->decimal('pricing')->nullable();
             $table->unsignedBigInteger('team_id');
             $table->foreign('team_id')->references('id')->on('teams');
             $table->timestamps();

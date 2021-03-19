@@ -19,6 +19,11 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+
+    public function login() {
+        return Inertia::render('Dashboard/User/Login');
+    }
+
     public function register() {
         return Inertia::render('Dashboard/User/Register', [
             'estadoCivil' => EstadoCivil::all(),
@@ -48,6 +53,7 @@ class UserController extends Controller
             'cond_especiales' => 'required|string',
             'antecedentes' => 'required|string',
             'isDiscapacitado' => 'required',
+            'phone' => 'required|min:11|max:11|string',
             'descripcionIsDiscapacitado' => 'nullable|string',
             'avenida' => 'required|min:3|string',
             'sector' => 'required|min:3|string',
@@ -72,7 +78,7 @@ class UserController extends Controller
             'email' => strtolower($request->input('email')),
             'password' => Hash::make($request->input('password')),
             'team_id' => 0,
-            'privileges' => $request->input('user')
+            'privileges' => 'user'
         ]);
 
         $direccion = Direccion::create([
@@ -104,6 +110,7 @@ class UserController extends Controller
             'fechaNacimiento' => $request->input('fechaNacimiento'),
             'nacionalidad' => strtolower($request->input('nacionalidad')),
             'sexo' => $request->input('sexo'),
+            'phone' => $request->input('phone'),
             'estadoCivil' => strtolower($request->input('estadoCivil')),
             'profesion' => strtolower($request->input('profesion')),
             'ocupacion' => strtolower($request->input('ocupacion')),
@@ -118,8 +125,15 @@ class UserController extends Controller
             'user_id' => $user->id
         ]);
 
-        return "Registro completado con exito";
+        return redirect('/');
 
         dd($request);
+    }
+
+    public function indexCensus() {
+        return Inertia::render('Dashboard/User/CensusManager/Index');
+    }
+    public function createCensus() {
+        return Inertia::render('Dashboard/User/CensusManager/Create');
     }
 }
