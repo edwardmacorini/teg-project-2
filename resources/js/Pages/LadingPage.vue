@@ -83,13 +83,36 @@
             <v-container>
                 <v-row>
                     <v-col>
-                        <articulos-component></articulos-component>
+                        <articulos-component
+                            url="https://i1.wp.com/ultimasnoticias.com.ve/wp-content/uploads/2021/03/AstraZeneca-FOTO-EFE.jpg?w=768&ssl=1"
+                            title="Ministerio de sanidad propone  retomar la vacunación"
+                            parr="El Ministerio de Sanidad propone retomar la vacunación con el fármaco de AstraZeneca el miércoles de la semana que viene. Así lo ha decidido tras el anuncio de la Agencia Europea de Medicamentos (EMA) de que la vacuna sigue teniendo más beneficios que riesgos. La directora ejecutiva de la EMA, Emer Cooke, ha informado de que el comité de expertos que ha evaluado los casos de trombosis que se han producido en algunas personas después de ser vacunadas ha concluido que la vacuna es “segura y eficaz”."
+                            link="https://www.msn.com/es-es/deportes/futbol/c3-baltimas-noticias-del-coronavirus-en-directo-la-federaci-c3-b3n-anuncia-que-no-habr-c3-a1-p-c3-bablico-en-la-final-de-la-copa-del-rey-entre-el-athletic-y-la-real/ar-BB1eIx1v"
+                        ></articulos-component>
                     </v-col>
                     <v-col>
-                        <articulos-component></articulos-component>
+                        <articulos-component
+                            url="https://i1.wp.com/ultimasnoticias.com.ve/wp-content/uploads/2020/03/Covid-19.jpg?w=768&ssl=1"
+                            title="Un año se ha cumplido desde la confirmación del primer caso en el país."
+                            parr="Se cumple un año de la llegada de los primeros casos de covid-19 a Venezuela, historia que comenzó con todos los pronósticos en contra dada la agresividad del virus y la situación país como consecuencia de tres años convulsos que tuvieron su génesis con la llegada de Donald Trump a la presidencia de los Estados Unidos."
+                            link="https://ultimasnoticias.com.ve/noticias/mas-vida/covid-19-en-venezuela-la-bomba-que-nunca-estallo/"
+                        ></articulos-component>
                     </v-col>
                     <v-col>
-                        <articulos-component></articulos-component>
+                        <articulos-component
+                            url="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2021/03/17/16159875787599.gif"
+                            title="Guía para interpretar tu test Covid"
+                            parr=""
+                            link="https://www.elmundo.es/ciencia-y-salud/salud/2021/03/18/6049fcb221efa09d6d8b4616.html"
+                        ></articulos-component>
+                    </v-col>
+                    <v-col>
+                        <articulos-component
+                            url="https://phantom-elmundo.unidadeditorial.es/440b931009df239a52008f54e1a9508c/crop/0x0/1023x682/resize/473/f/webp/assets/multimedia/imagenes/2021/03/16/16159114666234.jpg"
+                            title="La pandemia ha acabado con la vida de 112 médicos"
+                            parr="La labor y compromiso de estas 112 personas y mandar el mayor de los abrazos a sus familias. De igual manera queremos que este recuerdo y cariño vaya también a los cientos de compañeros que aún siguen luchando con las complicaciones de esta enfermedad y por los miles que están dando lo mejor de esta profesión en estos momentos. Se lo debemos a los que ya no están con nosotros"
+                            link="https://www.elmundo.es/ciencia-y-salud/salud/2021/03/18/60533c57fc6c8365118b4590.html"
+                        ></articulos-component>
                     </v-col>
                 </v-row>
             </v-container>
