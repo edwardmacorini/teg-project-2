@@ -10,12 +10,15 @@ use App\Models\Propiedad;
 use App\Models\SituacionEconomica;
 use App\Models\TipoVivienda;
 use App\Models\EstadoCivil;
+use App\Models\Product;
+use App\Models\Team;
 use App\Models\TipoSangre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -131,9 +134,40 @@ class UserController extends Controller
     }
 
     public function indexCensus() {
-        return Inertia::render('Dashboard/User/CensusManager/Index');
+        return Inertia::render('Dashboard/User/CensusManager/Index', [
+            'userData' => Auth::user()
+        ]);
     }
     public function createCensus() {
-        return Inertia::render('Dashboard/User/CensusManager/Create');
+        return Inertia::render('Dashboard/User/CensusManager/Create', [
+            'products' => Product::all(),
+            'userData' => Auth::user()
+        ]);
+    }
+
+    public function storeCensus(Request $request)
+    {
+        Validator::make($request->all(), [
+            'descripcion' => 'required',
+            'products' => 'required',
+            'recipe' => 'required',
+        ])->validate();
+
+        $file = $request->file('recipe');
+            $destinationPath = 'file_storage/';
+            $originalFile = $file->getClientOriginalName();
+            $filename=strtotime(date('Y-m-d-H:isa')).$originalFile;
+            $file->move($destinationPath, $filename);
+
+            // Beneficiados::create([
+            //     'descripcion' => strtolower($request->input('descripcion')),
+            //     'recipe' => $filename,
+            //     'institucion' => 1
+            // ]);
+
+            foreach ($request->input('products') as $arr) {
+                //
+            }
+            
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <user-layout>
+    <user-layout :userData="userData">
         <v-row justify="center" align="center">
             <v-col cols="9">
                 <v-card elevation="8" class="mt-5 px-5 py-10 radio">
@@ -45,6 +45,9 @@
 import UserLayout from "../../../../Layouts/UserLayout";
 
 export default {
+    props: {
+        userData: Object,
+    },
     components: {
         UserLayout
     },

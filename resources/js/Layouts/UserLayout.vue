@@ -1,8 +1,8 @@
 <template>
     <v-app id="inspire">
-        <v-navigation-drawer app permanent>
+        <v-navigation-drawer app v-model="drawer">
             <v-row justify="center" class="mt-10">
-                <v-img src="/assets/logo.jpeg" max-width="150"></v-img>
+                <v-img src="/assets/logo.jpeg" max-width="150" @click="drawer = !drawer"></v-img>
             </v-row>
             <v-row class="mt-10">
                 <v-divider></v-divider>
@@ -16,7 +16,7 @@
             </v-row>
             <v-row justify="center" class="mt-5">
                 <span class="headline font-weight-bold text-capitalize">
-                    Edward Macorini
+                    {{ funName(userData.name) }}
                 </span>
             </v-row>
             <!-- <inertia-link
@@ -42,8 +42,8 @@
         </v-navigation-drawer>
 
         <v-app-bar app>
-            <!-- <v-app-bar-nav-icon 
-            @click="drawer = !drawer"></v-app-bar-nav-icon> -->
+            <v-app-bar-nav-icon 
+            @click="drawer = !drawer"></v-app-bar-nav-icon>
 
             <v-toolbar-title>Panel de administración Medicease</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -68,10 +68,19 @@ export default {
         rolName: String,
         teamData: Object
     },
+    data() {
+        return {
+            drawer: true
+        }
+    },
     methods: {
         logout() {
             this.$inertia.post(route("logout"));
             location.replace("/home");
+        },
+        funName(txt) {
+            var arrayy = txt.split(' ');
+            return arrayy[0] + " " + arrayy[2];
         }
     }
 };

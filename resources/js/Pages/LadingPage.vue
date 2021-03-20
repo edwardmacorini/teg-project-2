@@ -27,22 +27,12 @@
                                             <h1
                                                 class="white--text tx-titulo text-center text-md-left"
                                             >
-                                                Lorem ipsum dolor sit amet,
-                                                consectetur adipisicing elit.
-                                                Aperiam, iure. Possimus aliquid
-                                                quis accusamus amet.
+                                                ¡Somos la ayuda que tu necesitas! 
                                             </h1>
                                             <p
                                                 class="white--text font-weight-light text-center text-md-left"
                                             >
-                                                Lorem ipsum dolor sit amet
-                                                consectetur adipisicing elit.
-                                                Illum quaerat eveniet temporibus
-                                                quis vitae excepturi adipisci
-                                                neque eligendi distinctio
-                                                obcaecati a, consequatur,
-                                                exercitationem vero est fuga
-                                                cupiditate eum soluta ipsum.
+                                                Nosotros ayudamos a los pacientes que padecen de enfermedades cronicas permitiendoles gestionar sus censos desde la comodidad de su hogar. Si eres una persona que padece de algun tipo de enfermedad cronica no dudes en registrarte para recibir tu censo.
                                             </p>
                                         </v-col>
                                     </v-row>
