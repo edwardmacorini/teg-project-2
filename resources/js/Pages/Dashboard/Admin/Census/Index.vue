@@ -35,14 +35,13 @@
                 :items-per-page="5"
                 class="elavation-1 mt-5"
             >
-                <template v-slot:item.resumen="{ item }" class="text-center">
-                    <v-btn
-                        text
-                        color="success"
-                        @click="openDialog(item.resumen)"
-                    >
+                <template v-slot:item.id="{ item }" class="text-center">
+                    <v-btn text color="success" @click="openDialog(item.id)">
                         <v-icon>mdi-clipboard-arrow-up</v-icon>
                     </v-btn>
+                </template>
+                <template v-slot:no-data>
+                    No poseé ninguna organización disponible
                 </template>
             </v-data-table>
         </v-card>
@@ -54,26 +53,21 @@
         >
             <v-card>
                 <v-card-title class="headline">
-                    Resumen de beneficiado Nº{{ resumen.id }}
+                    Resumen de beneficiado Nº
                 </v-card-title>
 
                 <v-card-text>
                     <v-row>
                         <v-col
                             >Nombre completo.
-                            <span class="text-capitalize">{{
-                                resumen.nombre
-                            }}</span></v-col
-                        >
+                            <span class="text-capitalize"></span
+                        ></v-col>
                     </v-row>
                     <v-row>
-                        <v-col
-                            >CI. {{ resumen.tipoCedula }}-{{ resumen.cedula }}
+                        <v-col>CI. </v-col>
+                        <v-col>
+                            Fecha de nacimiento.
                         </v-col>
-                        <v-col
-                            >Fecha de nacimiento.
-                            {{ resumen.fechaNacimiento }}</v-col
-                        >
                     </v-row>
                 </v-card-text>
 
@@ -87,6 +81,7 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+        {{ items }}
     </admin-layout>
 </template>
 
@@ -98,7 +93,9 @@ export default {
         userData: Object,
         teamData: Object,
         beneficiados: Array,
-        census: Array
+        census: Array,
+        antecedentes: Array,
+        discapacidades: Array
     },
     components: {
         AdminLayout
@@ -111,43 +108,98 @@ export default {
                     text: "Beneficiado",
                     align: "center",
                     sortable: true,
-                    value: "nombre"
+                    value: "beneficiado.nombre"
                 },
                 {
                     text: "Cedula",
                     align: "center",
                     sortable: true,
-                    value: "cedula"
+                    value: "beneficiado.cedula"
                 },
                 {
                     text: "Nacionalidad",
                     align: "center",
                     sortable: true,
-                    value: "nacionalidad"
+                    value: "beneficiado.nacionalidad"
                 },
                 {
-                    text: "Tipo de beneficio",
+                    text: "Razon social",
                     align: "center",
                     sortable: true,
-                    value: "tipo_beneficio"
+                    value: "descripcion"
                 },
                 {
                     text: "Resumen",
                     align: "center",
                     sortable: true,
-                    value: "resumen"
+                    value: "id"
                 }
             ],
             items: [],
-            beneficiado: []
+            beneficiado: {
+                id: null,
+                nombre: null,
+                tipoCedula: null,
+                cedula: null,
+                fechaNacimiento: null,
+                nacionalidad: null,
+                sexo: null,
+                estadoCivil: null,
+                profesion: null,
+                ocupacion: null,
+                cantidadFamilia: null,
+                cantidadHijos: null,
+                tipoVivienda: null,
+                propiedad: null,
+                direccion: null,
+                situacion_economica: null,
+                antecedentes_salud: null,
+                discapacitado: null
+            },
+            antecedente: {
+                tipo_sangre: null,
+                cond_especiales: null,
+                antecedentes: null
+            },
+            discapacidad: {
+                si_no: null,
+                descripcion: null
+            }
         };
     },
     mounted: function() {
         this.census.forEach(element => {
+            this.getBeneficiado(element.user_id);
             this.items.push({
-                id: element.id,
+                censusId: element.id,
                 descripcion: element.descripcion,
-                beneficiado: getBeneficiado()
+                beneficiado: {
+                    id: this.beneficiado.id,
+                    nombre: this.beneficiado.nombre,
+                    tipoCedula: this.beneficiado.tipoCedula,
+                    cedula: this.beneficiado.cedula,
+                    fechaNacimiento: this.beneficiado.fechaNacimiento,
+                    nacionalidad: this.beneficiado.nacionalidad,
+                    sexo: this.beneficiado.sexo,
+                    estadoCivil: this.beneficiado.estadoCivil,
+                    profesion: this.beneficiado.profesion,
+                    ocupacion: this.beneficiado.ocupacion,
+                    cantidadFamilia: this.beneficiado.cantidadFamilia,
+                    cantidadHijos: this.beneficiado.cantidadHijos,
+                    tipoVivienda: this.beneficiado.tipoVivienda,
+                    propiedad: this.beneficiado.propiedad,
+                    direccion: this.beneficiado.direccion,
+                    situacion_economica: this.beneficiado.situacion_economica,
+                    antecedentes_salud: {
+                        tipo_sangre: this.antecedente.tipo_sangre,
+                        cond_especiales: this.antecedente.cond_especiales,
+                        antecedentes: this.antecedente.antecedentes
+                    },
+                    discapacitado: {
+                        si_no: this.discapacidad.si_no,
+                        descripcion: this.discapacidad.descripcion
+                    }
+                }
             });
         });
     },
@@ -157,27 +209,57 @@ export default {
         },
         getBeneficiado(id) {
             this.beneficiados.forEach(element => {
-                if(element.id == id) {
-                    this.beneficiado.id = element.id;
-                    this.beneficiado.nombre = element.nombre;
-                    this.beneficiado.tipoCedula = element.tipoCedula;
-                    this.beneficiado.cedula = element.cedula;
-                    this.beneficiado.fechaNacimiento = element.fechaNacimiento;
-                    this.beneficiado.nacionalidad = element.nacionalidad;
-                    this.beneficiado.sexo = element.sexo;
-                    this.beneficiado.estadoCivil = element.estadoCivil;
-                    this.beneficiado.profesion = element.profesion;
-                    this.beneficiado.ocupacion = element.ocupacion;
-                    this.beneficiado.cantidadFamilia = element.cantidadFamilia;
-                    this.beneficiado.cantidadHijos = element.cantidadHijos;
-                    this.beneficiado.tipoVivienda = element.tipoVivienda;
-                    this.beneficiado.propiedad = element.propiedad;
-                    this.beneficiado.direccion  = element.direccion ;
-                    this.beneficiado.situacion_economica = element.situacion_economica;
-                    this.beneficiado.antecedentes_salud  = element.antecedentes_salud;
-                    this.beneficiado.discapacitado  = element.discapacitado;
+                if (element.user_id == id) {
+                    this.beneficiado = null;
+                    this.discapacidad = null;
+                    this.antecedente = null;
+                    this.beneficiado = {
+                        id: element.id,
+                        nombre: element.nombre,
+                        tipoCedula: element.tipoCedula,
+                        cedula: element.cedula,
+                        fechaNacimiento: element.fechaNacimiento,
+                        nacionalidad: element.nacionalidad,
+                        sexo: element.sexo,
+                        estadoCivil: element.estadoCivil,
+                        profesion: element.profesion,
+                        ocupacion: element.ocupacion,
+                        cantidadFamilia: element.cantidadFamilia,
+                        cantidadHijos: element.cantidadHijos,
+                        tipoVivienda: element.tipoVivienda,
+                        propiedad: element.propiedad,
+                        direccion: element.direccion,
+                        situacion_economica: element.situacion_economica,
+                        antecedentes_salud: this.getAntecedentes(
+                            element.antecedentes_salud
+                        ),
+                        discapacitado: this.getDiscapacidad(
+                            element.discapacitado
+                        )
+                    };
                 }
-            })
+            });
+        },
+        getAntecedentes(id) {
+            this.antecedentes.forEach(element => {
+                if (element.id == id) {
+                    this.discapacidad = {
+                        si_no: element.si_no,
+                        descripcion: element.descripcion
+                    };
+                }
+            });
+        },
+        getDiscapacidad(id) {
+            this.discapacidades.forEach(element => {
+                if (element.id == id) {
+                    this.antecedente = {
+                        tipo_sangre: element.tipo_sangre,
+                        cond_especiales: element.cond_especiales,
+                        antecedentes: element.antecedente
+                    };
+                }
+            });
         }
     }
 };

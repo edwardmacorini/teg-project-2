@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AntecedentesSalud;
 use App\Models\Beneficiados;
 use App\Models\Census;
+use App\Models\Discapacitado;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -25,7 +27,9 @@ class AdminController extends Controller
             'userData' => Auth::user(),
             'teamData' => Team::find(Auth::user()->team_id),
             'beneficiados' => Beneficiados::all(),
-            'census' => Census::where('estado', 'procesado')->get()
+            'census' => Census::where('estado', 'procesando')->get(),
+            'antecedentes' => AntecedentesSalud::all(),
+            'discapacidades' => Discapacitado::all()
         ]);
     }
 
