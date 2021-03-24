@@ -141,7 +141,6 @@ export default {
             })
         };
     },
-
     methods: {
         submit() {
             this.form.post(this.route("register"), {

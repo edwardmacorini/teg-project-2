@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Beneficiados;
+use App\Models\Census;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -21,7 +23,9 @@ class AdminController extends Controller
     {
         return Inertia::render('Dashboard/Admin/Census/Index', [
             'userData' => Auth::user(),
-            'teamData' => Team::find(Auth::user()->team_id)
+            'teamData' => Team::find(Auth::user()->team_id),
+            'beneficiados' => Beneficiados::all(),
+            'census' => Census::where('estado', 'procesado')->get()
         ]);
     }
 

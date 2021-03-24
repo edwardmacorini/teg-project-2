@@ -153,7 +153,6 @@
                 </form>
             </v-card-text>
         </v-card>
-        {{errors}}
     </admin-layout>
 </template>
 <script>
@@ -190,6 +189,17 @@ export default {
             }),
             dialog2: false
         };
+    },
+    watch: {
+        errors(errors) {
+            if (errors) {
+                this.$swal.fire({
+                    icon: "error",
+                    title: "Información inválida",
+                    text: "Por favor corrija la informacion e intente otra vez"
+                });
+            }
+        }
     },
     methods: {
         submit() {

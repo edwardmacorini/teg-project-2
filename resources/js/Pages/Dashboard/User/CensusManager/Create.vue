@@ -17,7 +17,7 @@
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
-                        <form @submit.prevent="submit()">
+                        <form @submit.prevent="submit()" enctype="multipart/form-data">
                             <v-card-text>
                                 <v-row justify="center">
                                     <v-col cols="auto">
@@ -121,7 +121,6 @@
                 </v-card>
             </v-col>
         </v-row>
-        {{ errors }}
     </user-layout>
 </template>
 
@@ -161,6 +160,15 @@ export default {
             setTimeout(() => (this[l] = false), 3000);
 
             this.loader = null;
+        },
+        errors(errors) {
+            if (errors) {
+                this.$swal.fire({
+                    icon: "error",
+                    title: "Información inválida",
+                    text: "Por favor corrija la información e intente otra vez"
+                });
+            }
         }
     },
     methods: {
@@ -172,8 +180,8 @@ export default {
         },
         previewFiles(event) {
             this.loader = "loading";
-            console.log(event.target.files);
-            this.form.recipe = event.target.files;
+            console.log(event.target.files[0]);
+            this.form.recipe = event.target.files[0];
         },
         submit() {
             this.form.post(this.route("user-create-store"));

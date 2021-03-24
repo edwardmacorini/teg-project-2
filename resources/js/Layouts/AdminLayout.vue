@@ -84,7 +84,7 @@
                 </v-row>
             </inertia-link>
             
-            <inertia-link
+            <!-- <inertia-link
                 :href="route('sadmin-index')"
                 style="text-decoration: none;"
                 v-if="((userData.privileges == 'oadmin' || userData.privileges == 'admin') && teamData.type == 0)"
@@ -104,7 +104,7 @@
                         Inventario
                     </v-col>
                 </v-row>
-            </inertia-link>
+            </inertia-link> -->
 
             <inertia-link
                 :href="route('sadmin-index')"

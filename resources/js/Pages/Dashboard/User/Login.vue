@@ -80,6 +80,9 @@
 import DefaultLayout from "../../../Layouts/DefaultLayout";
 
 export default {
+    props: {
+        errors: Object
+    },
     components: {
         DefaultLayout
     },
@@ -91,6 +94,17 @@ export default {
                 password: ""
             })
         };
+    },
+    watch: {
+        errors(errors) {
+            if (errors) {
+                this.$swal.fire({
+                    icon: "error",
+                    title: "Credenciales no validas",
+                    text: "Por favor intente otra vez"
+                });
+            }
+        }
     },
     methods: {
         submit() {

@@ -26,12 +26,25 @@
             <v-data-table
                 :headers="headers"
                 :items="items"
+                :search="search"
                 :items-per-page="5"
                 class="elavation-1 mt-5"
             >
-                <template v-slot:item.type={item}>
+                <template v-slot:item.name="{ item }">
+                    <span class="text-uppercase">{{ item.name }}</span>
+                </template>
+                <template v-slot:item.rif="{ item }">
+                    <span class="text-uppercase">J-{{ item.rif }}</span>
+                </template>
+                <template v-slot:item.username="{ item }">
+                    <span class="text-uppercase">{{ item.username }}</span>
+                </template>
+                <template v-slot:item.type="{ item }">
                     <span v-if="item.type">Organización</span>
                     <span v-else>Farmacia</span>
+                </template>
+                <template v-slot:no-data>
+                    No poseé ninguna organización disponible
                 </template>
             </v-data-table>
         </v-card>
@@ -55,7 +68,7 @@ export default {
             search: "",
             headers: [
                 {
-                    text: "Nombre",
+                    text: "Nombre de la institución",
                     align: "center",
                     sortable: true,
                     value: "name"
@@ -107,8 +120,8 @@ export default {
         conUser(id) {
             var value;
             this.userList.forEach(element => {
-                if(element.privileges == 'oadmin') {
-                    if(element.team_id == id) {
+                if (element.privileges == "oadmin") {
+                    if (element.team_id == id) {
                         value = element.username;
                     }
                 }

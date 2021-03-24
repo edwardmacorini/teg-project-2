@@ -7,7 +7,6 @@ use Inertia\Inertia;
 
 class OAdminController extends Controller
 {
-    // Login system
     public function login()
     {
         return Inertia::render('Dashboard/SAdmin/Login');

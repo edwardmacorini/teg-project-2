@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AntecedentesSalud;
 use App\Models\Beneficiados;
+use App\Models\Census;
 use App\Models\Direccion;
 use App\Models\Discapacitado;
 use App\Models\Propiedad;
@@ -19,6 +20,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Insumos;
 
 class UserController extends Controller
 {
@@ -135,7 +137,9 @@ class UserController extends Controller
 
     public function indexCensus() {
         return Inertia::render('Dashboard/User/CensusManager/Index', [
-            'userData' => Auth::user()
+            'userData' => Auth::user(),
+            'census' => Census::where('user_id', Auth::user()->id)->get(),
+            'products' => Insumos::all()
         ]);
     }
     public function createCensus() {
@@ -153,21 +157,24 @@ class UserController extends Controller
             'recipe' => 'required',
         ])->validate();
 
-        $file = $request->file('recipe');
-            $destinationPath = 'file_storage/';
-            $originalFile = $file->getClientOriginalName();
-            $filename=strtotime(date('Y-m-d-H:isa')).$originalFile;
-            $file->move($destinationPath, $filename);
+        $fileName = time().'.'.$request->file('recipe')->getClientOriginalExtension();
+        $request->file('recipe')->move(public_path('upload'), $fileName);
 
-            // Beneficiados::create([
-            //     'descripcion' => strtolower($request->input('descripcion')),
-            //     'recipe' => $filename,
-            //     'institucion' => 1
-            // ]);
+            $censu = Census::create([
+                'descripcion' => strtolower($request->input('descripcion')),
+                'recipe' => $fileName,
+                'institucion' => 0,
+                'estado' => 'procesando',
+                'user_id' => Auth::user()->id
+            ]);
 
             foreach ($request->input('products') as $arr) {
-                //
+                Insumos::create([
+                    'product' => $arr,
+                    'census_id' => $censu->id
+                ]);
+        
             }
-            
+        return redirect('/user/dashboard/index');
     }
 }

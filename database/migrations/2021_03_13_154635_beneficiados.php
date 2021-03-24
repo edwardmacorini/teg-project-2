@@ -22,12 +22,13 @@ class Beneficiados extends Migration
             $table->string('nacionalidad');
             $table->string('sexo');
             $table->string('estadoCivil');
-            $table->string('profesion');
+            $table->string('profesion')->nullable();
             $table->string('ocupacion');
             $table->integer('cantidadFamilia');
             $table->integer('cantidadHijos');
             $table->string('tipoVivienda');
             $table->string('propiedad');
+            $table->string('phone');
             $table->unsignedBigInteger('direccion');
             $table->foreign('direccion')->references('id')->on('direccion');
             $table->string('situacion_economica');

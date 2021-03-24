@@ -15,9 +15,11 @@ class CreateCensusTable extends Migration
     {
         Schema::create('census', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion');
-            $table->string('institucion');
-            $table->string('estado');
+            $table->string('descripcion')->nullable();
+            $table->string('institucion')->nullable();
+            $table->string('estado')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

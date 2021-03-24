@@ -33,6 +33,7 @@
                 :headers="headers"
                 :items="items"
                 :items-per-page="5"
+                :search="search"
                 class="elavation-1 mt-5"
             >
                 <template v-slot:item.actions="{ item }">
@@ -42,6 +43,9 @@
                     <v-icon small @click="deleteItem(item)">
                         mdi-delete
                     </v-icon>
+                </template>
+                <template v-slot:no-data>
+                    No poseé ninguna organización disponible
                 </template>
             </v-data-table>
         </v-card>
@@ -55,13 +59,14 @@ export default {
     props: {
         userData: Object,
         teamData: Object,
-        products: Object
+        products: Array
     },
     components: {
         AdminLayout
     },
     data() {
         return {
+            search: '',
             headers: [
                 {
                     text: "Nombre",

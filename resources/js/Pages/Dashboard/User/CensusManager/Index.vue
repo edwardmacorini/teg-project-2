@@ -27,9 +27,13 @@
                         :items-per-page="5"
                         class="elavation-1 mt-5"
                     >
-                        <template v-slot:item.type="{ item }">
-                            <span v-if="item.type">Organización</span>
-                            <span v-else>Farmacia</span>
+                        <template v-slot:item.resumen="{ item }">
+                            <v-btn class="" color="green" dark>
+                                <v-icon dark>mdi-archive-arrow-up</v-icon>
+                            </v-btn>
+                        </template>
+                        <template v-slot:item.created_at="{ item }">
+                                {{ item.created_at.substr(0,10) }}...
                         </template>
                         <template v-slot:no-data>
                             No poseé ningún censo
@@ -47,6 +51,8 @@ import UserLayout from "../../../../Layouts/UserLayout";
 export default {
     props: {
         userData: Object,
+        census: Array,
+        products: Array
     },
     components: {
         UserLayout
@@ -67,12 +73,6 @@ export default {
                     value: "descripcion"
                 },
                 {
-                    text: "Institución",
-                    align: "center",
-                    sortable: true,
-                    value: "institucion"
-                },
-                {
                     text: "Estado",
                     align: "center",
                     sortable: true,
@@ -87,6 +87,16 @@ export default {
             ],
             items: []
         };
+    },
+    mounted: function() {
+        this.census.forEach(element => {
+            this.items.push({
+                created_at: element.created_at,
+                descripcion: element.descripcion,
+                estado: element.estado,
+                resumen: element.id
+            });
+        });
     }
 };
 </script>
